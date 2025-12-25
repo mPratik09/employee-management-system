@@ -1,0 +1,15 @@
+services:
+  db:
+    image: mysql:8.0.40
+    container_name: emp_department
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: Mysql
+      MYSQL_DATABASE: employee_department_system
+    volumes:
+      - emp_department_vol:/var/lib/mysql
+      - ../db:/docker-entrypoint-initdb.d
+
+volumes:
+  emp_department_vol:
