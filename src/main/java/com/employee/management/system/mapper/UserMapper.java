@@ -2,6 +2,7 @@ package com.employee.management.system.mapper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.stereotype.Component;
 
 import com.employee.management.system.entity.User;
@@ -21,7 +22,8 @@ public class UserMapper
 		user.setFirstName(userRequestDTO.getFirstName());
 		user.setLastName(userRequestDTO.getLastName());
 		user.setEmail(userRequestDTO.getEmail());
-		user.setPassword(userRequestDTO.getPassword());
+		user.setPassword(
+				PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(userRequestDTO.getPassword()));
 		user.setContactNum(userRequestDTO.getContactNum());
 
 		return user;
