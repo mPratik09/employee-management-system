@@ -20,11 +20,6 @@ public class UserService
 
 	public UserResponseDTO saveUser(User user)
 	{
-		log.info("Name:\t {} {}", user.getFirstName(), user.getLastName());
-		log.info("Email:\t {}", user.getEmail());
-		log.info("Password:\t {}", user.getPassword());
-		log.info("Contact Num:\t {}", user.getContactNum());
-
 //		UserRepo userRepo = new UserRepo();
 
 		UserResponseDTO savedUser = userRepo.saveUser(user);

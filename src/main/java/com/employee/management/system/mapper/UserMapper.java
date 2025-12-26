@@ -40,6 +40,7 @@ public class UserMapper
 	{
 		UserResponseDTO userResponseDto = new UserResponseDTO();
 
+		userResponseDto.setId(user.getId());
 		userResponseDto.setFirstName(user.getFirstName());
 		userResponseDto.setLastName(user.getLastName());
 		userResponseDto.setEmail(user.getEmail());
