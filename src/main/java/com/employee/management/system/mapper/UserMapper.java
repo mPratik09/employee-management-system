@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.employee.management.system.entity.User;
 import com.employee.management.system.request.dto.UserRequestDTO;
 import com.employee.management.system.response.dto.UserResponseDTO;
+import com.employee.management.system.validator.UserValidator;
 
 @Component
 public class UserMapper
@@ -18,8 +19,10 @@ public class UserMapper
 	public User userMapper(UserRequestDTO userRequestDTO)
 	{
 		User user = new User();
+		UserValidator userValidator = new UserValidator();
 
-		if (!(userRequestDTO.getPassword()).equals(userRequestDTO.getReEnterPassword()))
+		if (!(userRequestDTO.getPassword().equals(userRequestDTO.getReEnterPassword())
+				&& userValidator.isValidPassword(userRequestDTO.getPassword())))
 		{
 			log.info("Password did not match.....");
 			throw new IllegalArgumentException("PASSWORD DIND NOT MATCH..");
@@ -28,6 +31,7 @@ public class UserMapper
 		user.setFirstName(userRequestDTO.getFirstName());
 		user.setLastName(userRequestDTO.getLastName());
 		user.setEmail(userRequestDTO.getEmail());
+
 		user.setPassword(
 				PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(userRequestDTO.getPassword()));
 		user.setContactNum(userRequestDTO.getContactNum());
