@@ -30,7 +30,7 @@ public class UserValidator
 	{
 
 		String regex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^a-zA-Z0-9]).{8,20}$";
-		log.info("Password:\t" + password);
+
 		if (password.matches(regex))
 		{
 			log.info("Valid Password..");

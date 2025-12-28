@@ -24,9 +24,11 @@ public class UserMapper
 		if (!userRequestDTO.getPassword().equals(userRequestDTO.getReEnterPassword()))
 		{
 			log.info("Passwords does not match..");
+			throw new IllegalArgumentException("PASSWORDS DOES NOT MATCH..");
 		} else if (!userValidator.isValidPassword(userRequestDTO.getPassword()))
 		{
 			log.info("Password is not strong enough...");
+			throw new IllegalArgumentException("PASSWORD IS NOT STRONG ENOUGH..");
 		}
 
 		user.setFirstName(userRequestDTO.getFirstName());
