@@ -21,11 +21,12 @@ public class UserMapper
 		User user = new User();
 		UserValidator userValidator = new UserValidator();
 
-		if (!(userRequestDTO.getPassword().equals(userRequestDTO.getReEnterPassword())
-				&& userValidator.isValidPassword(userRequestDTO.getPassword())))
+		if (!userRequestDTO.getPassword().equals(userRequestDTO.getReEnterPassword()))
 		{
-			log.info("Password did not match.....");
-			throw new IllegalArgumentException("PASSWORD DIND NOT MATCH..");
+			log.info("Passwords does not match..");
+		} else if (!userValidator.isValidPassword(userRequestDTO.getPassword()))
+		{
+			log.info("Password is not strong enough...");
 		}
 
 		user.setFirstName(userRequestDTO.getFirstName());

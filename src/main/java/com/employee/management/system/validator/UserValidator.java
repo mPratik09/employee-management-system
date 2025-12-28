@@ -29,15 +29,15 @@ public class UserValidator
 	public boolean isValidPassword(String password)
 	{
 
-		String regex = "^.{8,}$";
-
+		String regex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^a-zA-Z0-9]).{8,20}$";
+		log.info("Password:\t" + password);
 		if (password.matches(regex))
 		{
 			log.info("Valid Password..");
 			return true;
 		}
 
-		log.info("Invalid Password..");
+		log.info("Password must contain atleast 1 uppercase, lowercase, digit and special character..");
 		return false;
 	}
 
@@ -57,8 +57,7 @@ public class UserValidator
 
 	public boolean isUserValid(User user)
 	{
-		if ((isValidEmail(user.getEmail())) && (isValidPassword(user.getPassword()))
-				&& (isValidContactNum(user.getContactNum())))
+		if ((isValidEmail(user.getEmail())) && (isValidContactNum(user.getContactNum())))
 		{
 			log.info("Valid User..");
 			return true;
