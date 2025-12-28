@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.employee.management.system.entity.User;
 import com.employee.management.system.repo.UserRepo;
 import com.employee.management.system.response.dto.UserResponseDTO;
+import com.employee.management.system.validator.UserValidator;
 
 @Service
 public class UserService
@@ -21,6 +22,14 @@ public class UserService
 	public UserResponseDTO saveUser(User user)
 	{
 //		UserRepo userRepo = new UserRepo();
+
+		UserValidator validator = new UserValidator();
+
+		if (!validator.isUserValid(user))
+		{
+			log.info("Please enter Valid credentials..");
+			throw new IllegalArgumentException("Invalid credentials");
+		}
 
 		UserResponseDTO savedUser = userRepo.saveUser(user);
 

@@ -19,6 +19,12 @@ public class UserMapper
 	{
 		User user = new User();
 
+		if (!(userRequestDTO.getPassword()).equals(userRequestDTO.getReEnterPassword()))
+		{
+			log.info("Password did not match.....");
+			throw new IllegalArgumentException("PASSWORD DIND NOT MATCH..");
+		}
+
 		user.setFirstName(userRequestDTO.getFirstName());
 		user.setLastName(userRequestDTO.getLastName());
 		user.setEmail(userRequestDTO.getEmail());
