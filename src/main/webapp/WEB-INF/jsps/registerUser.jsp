@@ -45,6 +45,10 @@
 					placeholder="Enter your contact number.."></td>
 				</td>
 			</tr>
+			<tr> 
+				<td><input type="radio"name="admin">ADMIN</td>
+				<td><input type="radio"name="employee">EMPLOYEE</td>
+			</tr>
 			<tr>
 				<td colspan="2" align="right"><input type="Submit"
 					value="Proceed" />

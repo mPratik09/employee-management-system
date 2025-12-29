@@ -42,12 +42,13 @@ public class UserController
 			UserResponseDTO savedUser = userService.saveUser(user);
 
 			log.info("User has been saved with id:\t{}", savedUser.getId());
+			log.info("USER:\t{}", savedUser);
 
 		} catch (IllegalArgumentException e)
 		{
 			log.info("INVALID CREDENTIALS...");
 			redirectAttributes.addFlashAttribute("msg", e.getMessage());
-			return "redirect:/";
+			return "redirect:/registerUser";
 		}
 
 		return "savedUser";

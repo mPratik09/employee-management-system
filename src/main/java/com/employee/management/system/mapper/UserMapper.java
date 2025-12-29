@@ -58,6 +58,8 @@ public class UserMapper
 		userResponseDto.setLastName(user.getLastName());
 		userResponseDto.setEmail(user.getEmail());
 		userResponseDto.setContactNum(user.getContactNum());
+		userResponseDto.setCreatedAt(user.getCreatedAt());
+		userResponseDto.setUpdatedAt(user.getUpdatedAt());
 
 		return userResponseDto;
 	}

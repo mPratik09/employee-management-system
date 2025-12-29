@@ -4,14 +4,15 @@ create database employee_department_system;
 
 use employee_department_system;
 
-create table employees (
+create table users (
     id int primary key AUTO_INCREMENT,
     first_name varchar(25) not null,
     last_name varchar(25),
     email varchar(50) unique not null,
     password varchar(255) not null,
     contact_num varchar(50) not null,
-
+    `employee` boolean default false,
+    `admin` boolean default false,
     createdat timestamp default CURRENT_TIMESTAMP,
     updatedat timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 );
@@ -40,7 +41,15 @@ create table emp_depart (
 	emp_id int,
     depart_id int,
     primary key (emp_id, depart_id),
-    foreign key (emp_id) references employees(id),
+    foreign key (emp_id) references users(id),
 	foreign key (emp_id) references departments(id)
 );
 
+
+-------------- QUERIES --------------
+
+-- users table inserts
+
+SET SESSION sql_mode = CONCAT(@@sql_mode, ',NO_AUTO_VALUE_ON_ZERO');
+insert into users (id, first_name, last_name, email, password, contact_num) 
+		values(0, "Nebula", "support", "support@nebula.co.in", "Support@123", "9087654321");

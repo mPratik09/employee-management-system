@@ -1,5 +1,7 @@
 package com.employee.management.system.response.dto;
 
+import java.time.LocalDateTime;
+
 public class UserResponseDTO
 {
 
@@ -8,6 +10,9 @@ public class UserResponseDTO
 	private String lastName;
 	private String email;
 	private String contactNum;
+
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
 
 //	public UserResponseDTO(Integer id, String firstName, String lastName, String email, String contactNum)
 //	{
@@ -20,13 +25,6 @@ public class UserResponseDTO
 //	}
 
 //	do getter-setters require here?? specially getters??
-
-	@Override
-	public String toString()
-	{
-		return "UserResponseDTO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", contactNum=" + contactNum + "]";
-	}
 
 	public Integer getId()
 	{
@@ -76,6 +74,33 @@ public class UserResponseDTO
 	public void setContactNum(String contactNum)
 	{
 		this.contactNum = contactNum;
+	}
+
+	public LocalDateTime getCreatedAt()
+	{
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt)
+	{
+		this.createdAt = createdAt;
+	}
+
+	public LocalDateTime getUpdatedAt()
+	{
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt)
+	{
+		this.updatedAt = updatedAt;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "UserResponseDTO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", contactNum=" + contactNum + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 
 }
