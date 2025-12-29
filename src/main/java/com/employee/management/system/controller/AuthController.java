@@ -46,8 +46,6 @@ public class AuthController
 	public String verifyPassword(@RequestParam("email") String email, @RequestParam("password") String rawPassword,
 			RedirectAttributes redirectAttributes)
 	{
-		log.info("Username: {} || Entered Password: {}", email, rawPassword);
-
 		String password = userService.getByUserEmail(email);
 
 		if (!doPasswordsMatch(rawPassword, password))
