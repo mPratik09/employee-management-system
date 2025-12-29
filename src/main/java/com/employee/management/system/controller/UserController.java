@@ -40,7 +40,7 @@ public class UserController
 		} catch (IllegalArgumentException e)
 		{
 			log.info("INVALID CREDENTIALS...");
-			redirectAttributes.addFlashAttribute("msg", e.getMessage());
+			redirectAttributes.addFlashAttribute("error", e.getMessage());
 			return "redirect:/registerUser";
 		}
 

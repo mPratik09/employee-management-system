@@ -59,6 +59,7 @@
 	<label>Don't have an account??</label>
 	<br />
 	<a href="/register">Click here to Register..</a>
-
+	${error}
+	
 </body>
 </html>
