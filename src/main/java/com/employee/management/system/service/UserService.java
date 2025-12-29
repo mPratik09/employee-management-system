@@ -36,4 +36,13 @@ public class UserService
 		return savedUser;
 	}
 
+	public String getByUserEmail(String email)
+	{
+
+		String password = userRepo.findByUserEmail(email);
+
+		return password;
+
+	}
+
 }
