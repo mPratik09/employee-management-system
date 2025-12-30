@@ -5,11 +5,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.employee.management.system.entity.User;
 import com.employee.management.system.service.UserService;
 
 @Controller
@@ -44,18 +46,21 @@ public class AuthController
 
 	@PostMapping("/verifyLogin")
 	public String verifyPassword(@RequestParam("email") String email, @RequestParam("password") String rawPassword,
-			RedirectAttributes redirectAttributes)
+			RedirectAttributes redirectAttributes, Model model)
 	{
-		String password = userService.getByUserEmail(email);
+		User user = userService.getByUserEmail(email);
 
-		if (!doPasswordsMatch(rawPassword, password))
+		if (!doPasswordsMatch(rawPassword, user.getPassword()))
 		{
 			log.info("Password did not match..");
 			redirectAttributes.addFlashAttribute("error", "Invalid email or password");
 			return "redirect:/showLogin";
 		}
 
-		return "redirect:/loggedIn";
+		log.info("User in Auth: {}", user);
+		model.addAttribute("user", user);
+
+		return "loggedIn";
 	}
 
 	public boolean doPasswordsMatch(String rawPassword, String encodedPassword)

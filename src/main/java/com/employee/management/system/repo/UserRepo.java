@@ -2,8 +2,6 @@ package com.employee.management.system.repo;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,7 +64,7 @@ public class UserRepo
 
 	}
 
-	public String findByUserEmail(String email)
+	public User findByUserEmail(String email)
 	{
 
 		log.info("EMAIL:\t" + email);
@@ -76,11 +74,10 @@ public class UserRepo
 		log.info("find by email query:\t" + findByEmailid);
 
 //		TODO: fetch the whole user object insted of only password
-		List<Map<String, Object>> queryForList = jdbcTemplate.queryForList(findByEmailid.toString(), email);
+		User user = jdbcTemplate.queryForObject(findByEmailid.toString(), new BeanPropertyRowMapper<>(User.class),
+				email);
 
-		String password = (String) queryForList.get(0).get("password");
-
-		return password;
+		return user;
 	}
 
 }

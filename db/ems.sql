@@ -11,8 +11,8 @@ create table users (
     email varchar(50) unique not null,
     password varchar(255) not null,
     contact_num varchar(50) not null,
-    `employee` boolean default false,
-    `admin` boolean default false,
+    `status` varchar(10) DEFAULT 'PENDING',
+    `role` varchar(10) DEFAULT NULL,
     createdat timestamp default CURRENT_TIMESTAMP,
     updatedat timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 );
@@ -46,10 +46,10 @@ create table emp_depart (
 );
 
 
--------------- QUERIES --------------
+-- ------------ QUERIES --------------
 
 -- users table inserts
 
 SET SESSION sql_mode = CONCAT(@@sql_mode, ',NO_AUTO_VALUE_ON_ZERO');
-insert into users (id, first_name, last_name, email, password, contact_num) 
-		values(0, "Nebula", "support", "support@nebula.co.in", "Support@123", "9087654321");
+insert into users (id, first_name, last_name, email, password, contact_num, status, role) 
+		values(0, "Nebula", "support", "support@nebula.co.in", "Support@123", "9087654321", "ASSIGNED", "SUPPORT");

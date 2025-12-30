@@ -36,12 +36,12 @@ public class UserService
 		return savedUser;
 	}
 
-	public String getByUserEmail(String email)
+	public User getByUserEmail(String email)
 	{
 
-		String password = userRepo.findByUserEmail(email);
+		User user = userRepo.findByUserEmail(email);
 
-		return password;
+		return user;
 
 	}
 

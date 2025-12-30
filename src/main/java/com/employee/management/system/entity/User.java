@@ -10,6 +10,8 @@ public class User
 	private String email;
 	private String password;
 	private String contactNum;
+	private String status;
+	private String role;
 
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
@@ -74,6 +76,26 @@ public class User
 		this.contactNum = contactNum;
 	}
 
+	public String getStatus()
+	{
+		return status;
+	}
+
+	public void setStatus(String status)
+	{
+		this.status = status;
+	}
+
+	public String getRole()
+	{
+		return role;
+	}
+
+	public void setRole(String role)
+	{
+		this.role = role;
+	}
+
 	public LocalDateTime getCreatedAt()
 	{
 		return createdAt;
@@ -97,8 +119,9 @@ public class User
 	@Override
 	public String toString()
 	{
-		return "User [id=" + id + ", firstname=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", contactNum=" + contactNum + ", status=" + status + ", role=" + role + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + "]";
 	}
 
 }
