@@ -54,7 +54,7 @@ public class AuthController
 
 		if (!optionalUser.isPresent())
 		{
-			log.info("User Not FOund..");
+			log.info("User not found with email: {}", email);
 			return "login";
 		}
 
@@ -67,21 +67,17 @@ public class AuthController
 			return "redirect:/showLogin";
 		}
 
-		log.info("User info {}", user);
 		if (user.getStatus().equals("ASSIGNED"))
 		{
 
 			if (user.getRole().equals("SUPPORT"))
 			{
-//			return "redirect:/support";
 				return "support";
 			} else if (user.getRole().equals("ADMIN"))
 			{
-//			return "redirect:/employee";
 				return "admin";
 			} else
 			{
-//			return "redirect:/admin";
 				return "employee";
 			}
 		}

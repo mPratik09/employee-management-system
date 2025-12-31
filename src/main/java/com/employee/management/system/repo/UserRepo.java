@@ -69,7 +69,6 @@ public class UserRepo
 	public Optional<User> findByUserEmail(String email)
 	{
 
-		log.info("EMAIL:\t" + email);
 		StringBuilder findByEmailid = new StringBuilder(find_by_emailid);
 		findByEmailid.append("?");
 
