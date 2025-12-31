@@ -1,5 +1,7 @@
 package com.employee.management.system.controller;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +50,15 @@ public class AuthController
 	public String verifyPassword(@RequestParam("email") String email, @RequestParam("password") String rawPassword,
 			RedirectAttributes redirectAttributes, Model model)
 	{
-		User user = userService.getByUserEmail(email);
-		if (user == null)
+		Optional<User> optionalUser = userService.getByUserEmail(email);
+
+		if (!optionalUser.isPresent())
 		{
 			log.info("User Not FOund..");
-			return "loggedIn";
+			return "login";
 		}
+
+		User user = optionalUser.get();
 
 		if (!doPasswordsMatch(rawPassword, user.getPassword()))
 		{
