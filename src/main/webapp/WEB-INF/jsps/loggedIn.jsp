@@ -10,10 +10,16 @@
 	<h2>Logged In Successfully</h2>
 
 	${msg}
-	<h2>Make a request..</h2>
+	<h2>Your request is pending.....</h2>
 
+	${user.role}
+	<br />
+	<br />
+	<br />
+	<br />
 	${user.id} ${user.firstName} ${user.lastName} ${user.email}
 	${user.contactNum}
+
 
 
 	${user}

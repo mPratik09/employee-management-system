@@ -2,11 +2,13 @@ package com.employee.management.system.repo;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -64,7 +66,7 @@ public class UserRepo
 
 	}
 
-	public User findByUserEmail(String email)
+	public Optional<User> findByUserEmail(String email)
 	{
 
 		log.info("EMAIL:\t" + email);
@@ -74,10 +76,16 @@ public class UserRepo
 		log.info("find by email query:\t" + findByEmailid);
 
 //		TODO: fetch the whole user object insted of only password
-		User user = jdbcTemplate.queryForObject(findByEmailid.toString(), new BeanPropertyRowMapper<>(User.class),
-				email);
+		try
+		{
+			User user = jdbcTemplate.queryForObject(findByEmailid.toString(), new BeanPropertyRowMapper<>(User.class),
+					email);
+			return Optional.of(user);
+		} catch (EmptyResultDataAccessException e)
+		{
+			return Optional.empty();
+		}
 
-		return user;
 	}
 
 }

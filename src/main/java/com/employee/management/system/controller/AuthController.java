@@ -49,12 +49,36 @@ public class AuthController
 			RedirectAttributes redirectAttributes, Model model)
 	{
 		User user = userService.getByUserEmail(email);
+		if (user == null)
+		{
+			log.info("User Not FOund..");
+			return "loggedIn";
+		}
 
 		if (!doPasswordsMatch(rawPassword, user.getPassword()))
 		{
 			log.info("Password did not match..");
 			redirectAttributes.addFlashAttribute("error", "Invalid email or password");
 			return "redirect:/showLogin";
+		}
+
+		log.info("User info {}", user);
+		if (user.getStatus().equals("ASSIGNED"))
+		{
+
+			if (user.getRole().equals("SUPPORT"))
+			{
+//			return "redirect:/support";
+				return "support";
+			} else if (user.getRole().equals("ADMIN"))
+			{
+//			return "redirect:/employee";
+				return "admin";
+			} else
+			{
+//			return "redirect:/admin";
+				return "employee";
+			}
 		}
 
 		log.info("User in Auth: {}", user);
