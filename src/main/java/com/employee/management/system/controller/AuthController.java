@@ -2,6 +2,8 @@ package com.employee.management.system.controller;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +50,7 @@ public class AuthController
 
 	@PostMapping("/verifyLogin")
 	public String verifyPassword(@RequestParam("email") String email, @RequestParam("password") String rawPassword,
-			RedirectAttributes redirectAttributes, Model model)
+			RedirectAttributes redirectAttributes, HttpSession httpSession, Model model)
 	{
 		Optional<User> optionalUser = userService.getByUserEmail(email);
 
@@ -70,10 +72,12 @@ public class AuthController
 		if (user.getStatus().equals("ASSIGNED"))
 		{
 
-			if (user.getRole().equals("SUPPORT"))
+			User userWithSession = createSession(httpSession, user);
+
+			if (userWithSession.getRole().equals("SUPPORT"))
 			{
 				return "support";
-			} else if (user.getRole().equals("ADMIN"))
+			} else if (userWithSession.getRole().equals("ADMIN"))
 			{
 				return "admin";
 			} else
@@ -86,6 +90,16 @@ public class AuthController
 		model.addAttribute("user", user);
 
 		return "loggedIn";
+	}
+
+	private User createSession(HttpSession httpSession, User user)
+	{
+
+		httpSession.setAttribute("userSession", user);
+
+		User userSession = (User) httpSession.getAttribute("userSession");
+
+		return userSession;
 	}
 
 	public boolean doPasswordsMatch(String rawPassword, String encodedPassword)
