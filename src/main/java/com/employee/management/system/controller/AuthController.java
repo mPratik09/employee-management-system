@@ -92,6 +92,15 @@ public class AuthController
 		return "loggedIn";
 	}
 
+	@PostMapping("/logout")
+	public String logout(HttpSession httpSession)
+	{
+		httpSession.invalidate();
+		log.info("Session invalidated. User logged out.");
+
+		return "redirect:/showLogin";
+	}
+
 	private User createSession(HttpSession httpSession, User user)
 	{
 

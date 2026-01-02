@@ -7,8 +7,8 @@
 <title>Employee</title>
 </head>
 <body>
+	<%@ include file="logout.jsp" %>
 	<h2>Welcome to EMPLOYEE Page</h2>
-	
 	
 	${user.role}
 	<br />
