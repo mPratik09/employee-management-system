@@ -2,6 +2,8 @@ package com.employee.management.system.repo;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -33,6 +35,9 @@ public class UserRepo
 
 	@Value("${FIND_BY_EMAILID}")
 	private String find_by_emailid;
+
+	@Value("${FETCH_PENDING_STATUS}")
+	private String fetch_pending_status;
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -80,6 +85,25 @@ public class UserRepo
 			User user = jdbcTemplate.queryForObject(findByEmailid.toString(), new BeanPropertyRowMapper<>(User.class),
 					email);
 			return Optional.of(user);
+		} catch (EmptyResultDataAccessException e)
+		{
+			return Optional.empty();
+		}
+
+	}
+
+	public Optional<List<Map<String, Object>>> fetchRecords()
+	{
+
+		StringBuilder findByStatus = new StringBuilder(fetch_pending_status);
+
+		log.info("find by PENDING status query:\t" + findByStatus);
+
+		try
+		{
+//			User user = jdbcTemplate.queryForObject(findByStatus.toString(), new BeanPropertyRowMapper<>(User.class));
+			List<Map<String, Object>> users = jdbcTemplate.queryForList(fetch_pending_status);
+			return Optional.of(users);
 		} catch (EmptyResultDataAccessException e)
 		{
 			return Optional.empty();

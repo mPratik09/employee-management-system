@@ -1,5 +1,8 @@
 package com.employee.management.system.controller;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -77,12 +80,20 @@ public class AuthController
 
 			if (userWithSession.getRole().equals("SUPPORT"))
 			{
+				Optional<List<Map<String, Object>>> pendingUser = userService.fetchRecords();
+				List<Map<String, Object>> pendingUserList = pendingUser.orElse(Collections.emptyList());
+
+				log.info("Pending Users List: {}", pendingUserList);
+				model.addAttribute("pendingUser", pendingUserList);
+
 				return "support";
 			} else if (userWithSession.getRole().equals("ADMIN"))
 			{
+				model.addAttribute("user", userWithSession);
 				return "admin";
 			} else
 			{
+				model.addAttribute("user", userWithSession);
 				return "employee";
 			}
 		}
