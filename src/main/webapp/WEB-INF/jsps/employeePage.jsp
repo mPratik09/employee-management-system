@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%@ include file="logout.jsp"%>
+	
 	<h2>Registered as an Employee</h2>
-	
-	
 	
 </body>
 </html>

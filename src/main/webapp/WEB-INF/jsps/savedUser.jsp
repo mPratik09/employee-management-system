@@ -7,6 +7,7 @@
 <title>savedUser HTML</title>
 </head>
 <body>
+	<%@ include file="logout.jsp"%>
 	<h2>User Saved Successfully - HTML</h2>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.employee.management.system.controller;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -109,6 +110,23 @@ public class AuthController
 		User userSession = (User) httpSession.getAttribute("userSession");
 
 		return userSession;
+	}
+
+	@GetMapping("/dashboard")
+	public String dashboard(HttpSession session, HttpServletResponse response)
+	{
+
+		if (session.getAttribute("userSession") == null)
+		{
+			return "redirect:/showLogin";
+		}
+
+		// this prevents browser caching
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+		response.setHeader("Pragma", "no-cache");
+		response.setDateHeader("Expires", 0);
+
+		return "dashboard";
 	}
 
 	public boolean doPasswordsMatch(String rawPassword, String encodedPassword)

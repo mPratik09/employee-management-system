@@ -7,7 +7,9 @@
 <title>Support Page</title>
 </head>
 <body>
+
 	<h2>Welcome to SUPPORT Page..</h2>
+	<%@ include file="logout.jsp"%>
 
 
 	${user.role}
