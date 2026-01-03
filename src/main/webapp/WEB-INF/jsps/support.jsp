@@ -13,9 +13,6 @@
 	<h2>Welcome to SUPPORT Page..</h2>
 	<%@ include file="logout.jsp"%>
 
-
-
-
 	<table border="4">
 		<tr>
 			<th>Id</th>
@@ -27,7 +24,6 @@
 		</tr>
 
 		<c:if test="${not empty msg}">
-		
 			<p>${msg}</p>
 		</c:if>
 
@@ -37,8 +33,21 @@
 				<td>${pendingUsers.firstName}</td>
 				<td>${pendingUsers.lastName}</td>
 				<td>${pendingUsers.email}</td>
-				<td><a href="">Accept</a></td>
-				<td><a href="">Reject</a></td>
+	<!-- 			
+				<td>
+					<form action="roleAssign" method="post">
+						<button type="submit">ADMIN</button>
+					</form>
+				</td>
+				<td>
+					<form action="roleAssign" method="post">
+						<button type="submit">EMPLOYEE</button>
+					</form>
+				</td>
+	 -->			
+				<td><a href="roleAssign?id=${pendingUsers.id}">ADMIN</a></td>
+				<td><a href="roleAssign?id=${pendingUsers.id}">EMPLOYEE</a></td>
+				
 			</tr>
 		</c:forEach>
 
