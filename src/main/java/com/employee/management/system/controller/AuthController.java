@@ -80,7 +80,7 @@ public class AuthController
 
 			if (userWithSession.getRole().equals("SUPPORT"))
 			{
-				Optional<List<Map<String, Object>>> pendingUser = userService.fetchRecords();
+				Optional<List<Map<String, Object>>> pendingUser = userService.getPendingUsers();
 				List<Map<String, Object>> pendingUserList = pendingUser.orElse(Collections.emptyList());
 
 				log.info("Pending Users List: {}", pendingUserList);

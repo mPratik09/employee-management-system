@@ -49,10 +49,10 @@ public class UserService
 
 	}
 
-	public Optional<List<Map<String, Object>>> fetchRecords()
+	public Optional<List<Map<String, Object>>> getPendingUsers()
 	{
 
-		Optional<List<Map<String, Object>>> pendingUsers = userRepo.fetchRecords();
+		Optional<List<Map<String, Object>>> pendingUsers = userRepo.getPendingUsers();
 
 		return pendingUsers;
 	}

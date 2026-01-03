@@ -13,7 +13,6 @@
 	<h2>Welcome to SUPPORT Page..</h2>
 	<%@ include file="logout.jsp"%>
 
-	${pendingUser}
 	<table border="4">
 		<tr>
 			<th>Id</th>

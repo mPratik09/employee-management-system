@@ -36,8 +36,8 @@ public class UserRepo
 	@Value("${FIND_BY_EMAILID}")
 	private String find_by_emailid;
 
-	@Value("${FETCH_PENDING_STATUS}")
-	private String fetch_pending_status;
+	@Value("${FETCH_PENDING_USERS}")
+	private String fetch_pending_users;
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -92,17 +92,17 @@ public class UserRepo
 
 	}
 
-	public Optional<List<Map<String, Object>>> fetchRecords()
+	public Optional<List<Map<String, Object>>> getPendingUsers()
 	{
 
-		StringBuilder findByStatus = new StringBuilder(fetch_pending_status);
+		StringBuilder findByStatus = new StringBuilder(fetch_pending_users);
 
 		log.info("find by PENDING status query:\t" + findByStatus);
 
 		try
 		{
 //			User user = jdbcTemplate.queryForObject(findByStatus.toString(), new BeanPropertyRowMapper<>(User.class));
-			List<Map<String, Object>> users = jdbcTemplate.queryForList(fetch_pending_status);
+			List<Map<String, Object>> users = jdbcTemplate.queryForList(fetch_pending_users);
 			return Optional.of(users);
 		} catch (EmptyResultDataAccessException e)
 		{
