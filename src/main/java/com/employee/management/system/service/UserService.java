@@ -1,7 +1,6 @@
 package com.employee.management.system.service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -49,12 +48,12 @@ public class UserService
 
 	}
 
-	public Optional<List<Map<String, Object>>> getPendingUsers()
+	public List<User> getPendingUsers()
 	{
 
-		Optional<List<Map<String, Object>>> pendingUsers = userRepo.getPendingUsers();
+		List<User> usersList = userRepo.getPendingUsers();
 
-		return pendingUsers;
+		return usersList;
 	}
 
 }

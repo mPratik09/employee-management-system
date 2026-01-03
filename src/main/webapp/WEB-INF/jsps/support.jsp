@@ -13,6 +13,9 @@
 	<h2>Welcome to SUPPORT Page..</h2>
 	<%@ include file="logout.jsp"%>
 
+
+
+
 	<table border="4">
 		<tr>
 			<th>Id</th>
@@ -23,11 +26,16 @@
 			<th>Reject</th>
 		</tr>
 
+		<c:if test="${not empty msg}">
+		
+			<p>${msg}</p>
+		</c:if>
+
 		<c:forEach items="${pendingUser}" var="pendingUsers">
 			<tr>
 				<td>${pendingUsers.id}</td>
-				<td>${pendingUsers.first_name}</td>
-				<td>${pendingUsers.last_name}</td>
+				<td>${pendingUsers.firstName}</td>
+				<td>${pendingUsers.lastName}</td>
 				<td>${pendingUsers.email}</td>
 				<td><a href="">Accept</a></td>
 				<td><a href="">Reject</a></td>

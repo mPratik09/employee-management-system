@@ -1,8 +1,6 @@
 package com.employee.management.system.controller;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -80,11 +78,16 @@ public class AuthController
 
 			if (userWithSession.getRole().equals("SUPPORT"))
 			{
-				Optional<List<Map<String, Object>>> pendingUser = userService.getPendingUsers();
-				List<Map<String, Object>> pendingUserList = pendingUser.orElse(Collections.emptyList());
+				List<User> pendingUsersList = userService.getPendingUsers();
 
-				log.info("Pending Users List: {}", pendingUserList);
-				model.addAttribute("pendingUser", pendingUserList);
+				if (pendingUsersList.isEmpty())
+				{
+					model.addAttribute("msg", "No active user found with PENDING status..");
+					return "support";
+				}
+
+				log.info("Pending Users List: {}", pendingUsersList);
+				model.addAttribute("pendingUser", pendingUsersList);
 
 				return "support";
 			} else if (userWithSession.getRole().equals("ADMIN"))

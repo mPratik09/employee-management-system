@@ -3,7 +3,6 @@ package com.employee.management.system.repo;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -77,7 +76,7 @@ public class UserRepo
 		StringBuilder findByEmailid = new StringBuilder(find_by_emailid);
 		findByEmailid.append("?");
 
-		log.info("find by email query:\t" + findByEmailid);
+		log.info("SQL query - FIND_BY_EMAILID: {} || email: {}", findByEmailid, email);
 
 //		TODO: fetch the whole user object insted of only password
 		try
@@ -92,23 +91,15 @@ public class UserRepo
 
 	}
 
-	public Optional<List<Map<String, Object>>> getPendingUsers()
+	public List<User> getPendingUsers()
 	{
 
 		StringBuilder findByStatus = new StringBuilder(fetch_pending_users);
 
-		log.info("find by PENDING status query:\t" + findByStatus);
+		log.info("SQL query - FETCH_PENDING_USERS:\t{}", findByStatus);
 
-		try
-		{
-//			User user = jdbcTemplate.queryForObject(findByStatus.toString(), new BeanPropertyRowMapper<>(User.class));
-			List<Map<String, Object>> users = jdbcTemplate.queryForList(fetch_pending_users);
-			return Optional.of(users);
-		} catch (EmptyResultDataAccessException e)
-		{
-			return Optional.empty();
-		}
-
+		List<User> pendingUsers = jdbcTemplate.query(fetch_pending_users, new BeanPropertyRowMapper<>(User.class));
+		return pendingUsers;
 	}
 
 }
