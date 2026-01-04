@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,11 +33,13 @@ public class SupportController
 		return "assignRole";
 	}
 
-	@GetMapping("/roleAssign")
-	public String roleAssignment(@RequestParam("id") int id, Model model)
+	@PostMapping("/roleAssign")
+	public String roleAssignment(@RequestParam("id") int id, @RequestParam("role") String role, Model model)
 	{
-		log.info("Inside eole assign controller");
+		log.info("Inside role assign controller");
 		supportRepo.roleAssign(id);
+
+		log.info("Id {} with role {}", id, role);
 		List<User> pendingUsers = userService.getPendingUsers();
 		model.addAttribute("pendingUser", pendingUsers);
 		return "support";

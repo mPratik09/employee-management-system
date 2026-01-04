@@ -33,21 +33,21 @@
 				<td>${pendingUsers.firstName}</td>
 				<td>${pendingUsers.lastName}</td>
 				<td>${pendingUsers.email}</td>
-	<!-- 			
+
 				<td>
 					<form action="roleAssign" method="post">
-						<button type="submit">ADMIN</button>
+						<input type="hidden" name="id" value="${pendingUsers.id}">
+
+						<button type="submit" name="role" value="ADMIN">Admin</button>
 					</form>
 				</td>
 				<td>
 					<form action="roleAssign" method="post">
-						<button type="submit">EMPLOYEE</button>
+						<input type="hidden" name="id" value="${pendingUsers.id}">
+
+						<button type="submit" name="role" value="EMPLOYEE">EMPLOYEE</button>
 					</form>
 				</td>
-	 -->			
-				<td><a href="roleAssign?id=${pendingUsers.id}">ADMIN</a></td>
-				<td><a href="roleAssign?id=${pendingUsers.id}">EMPLOYEE</a></td>
-				
 			</tr>
 		</c:forEach>
 
