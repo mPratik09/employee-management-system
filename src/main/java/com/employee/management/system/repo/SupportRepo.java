@@ -24,7 +24,7 @@ public class SupportRepo
 	public User roleAssign(int id)
 	{
 
-		jdbcTemplate.update(assign_role, "ASSIGNED", "ADMINN", id);
+		jdbcTemplate.update(assign_role, "ASSIGNED", "ADMIN", id);
 		return null;
 	}
 
