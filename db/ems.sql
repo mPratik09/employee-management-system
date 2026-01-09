@@ -16,7 +16,7 @@ create table users (
     email varchar(50) unique not null,
     password varchar(255) not null,
     contact_num varchar(50) not null,
-    status varchar(10) default null,
+    status varchar(10) default 'UNASSIGNED',
     createdat timestamp default CURRENT_TIMESTAMP,
     updatedat timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
     constraint fk_users_status foreign key (status) references status (status)
@@ -53,7 +53,7 @@ insert into `status` (id, `status`) values (0, 'UNASSIGNED'), (1, 'PENDING'), (2
 
 SET SESSION sql_mode = CONCAT(@@sql_mode, ',NO_AUTO_VALUE_ON_ZERO');
 insert into users (id, first_name, last_name, email, password, contact_num, `status`) 
-		values(0, "Nebula", "support", "support@nebula.co.in", "{noop}Support@123", "9087654321", "UNASSIGNED"),
+		values(0, "Nebula", "support", "support@nebula.co.in", "{noop}Support@123", "9087654321", "ASSIGNED"),
         (1, "Aman", "Chandra", "aman@nebula.co.in", "{noop}Aman@123", "9090909001", "UNASSIGNED"),
         (2, "Amit", "Bavalekar", "amit@nebula.co.in", "{noop}Amit@123", "9090909004", "UNASSIGNED"),
         (3, "Akshay", "Bhoite", "akshay@nebula.co.in", "{noop}Akshay@123", "9090909006", "UNASSIGNED"),
