@@ -39,17 +39,9 @@ public class UserMapper
 				PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(userRequestDTO.getPassword()));
 		user.setContactNum(userRequestDTO.getContactNum());
 		user.setStatus(userRequestDTO.getStatus());
-		user.setRole(userRequestDTO.getRole());
 
 		return user;
 	}
-
-//	public static UserResponseDTO userDtoMapper(User user)
-//	{
-//		UserResponseDTO userDto = new UserResponseDTO(user.getId(), user.getFirstName(), user.getLastName(),
-//				user.getEmail(), user.getContactNum());
-//		return userDto;
-//	}
 
 	public UserResponseDTO userDtoMapper(User user)
 	{
@@ -63,7 +55,6 @@ public class UserMapper
 		userResponseDto.setCreatedAt(user.getCreatedAt());
 		userResponseDto.setUpdatedAt(user.getUpdatedAt());
 		userResponseDto.setStatus(user.getStatus());
-		userResponseDto.setRole(user.getRole());
 
 		return userResponseDto;
 	}

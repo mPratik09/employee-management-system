@@ -11,7 +11,6 @@ public class User
 	private String password;
 	private String contactNum;
 	private String status;
-	private String role;
 
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
@@ -86,16 +85,6 @@ public class User
 		this.status = status;
 	}
 
-	public String getRole()
-	{
-		return role;
-	}
-
-	public void setRole(String role)
-	{
-		this.role = role;
-	}
-
 	public LocalDateTime getCreatedAt()
 	{
 		return createdAt;
@@ -120,8 +109,8 @@ public class User
 	public String toString()
 	{
 		return "\nUser [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", contactNum=" + contactNum + ", status=" + status + ", role=" + role + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + "]";
+				+ ", contactNum=" + contactNum + ", status=" + status + ", createdAt=" + createdAt + ", updatedAt="
+				+ updatedAt + "]";
 	}
 
 }

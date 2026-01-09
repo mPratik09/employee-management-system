@@ -9,7 +9,6 @@ public class UserRequestDTO
 	private String reEnterPassword;
 	private String contactNum;
 	private String status;
-	private String role;
 
 	public String getFirstName()
 	{
@@ -81,22 +80,12 @@ public class UserRequestDTO
 		this.status = status;
 	}
 
-	public String getRole()
-	{
-		return role;
-	}
-
-	public void setRole(String role)
-	{
-		this.role = role;
-	}
-
 	@Override
 	public String toString()
 	{
 		return "UserRequestDTO [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password="
 				+ password + ", reEnterPassword=" + reEnterPassword + ", contactNum=" + contactNum + ", status="
-				+ status + ", role=" + role + "]";
+				+ status + "]";
 	}
 
 }

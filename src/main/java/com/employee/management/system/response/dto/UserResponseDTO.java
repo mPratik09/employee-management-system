@@ -11,7 +11,6 @@ public class UserResponseDTO
 	private String email;
 	private String contactNum;
 	private String status;
-	private String role;
 
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
@@ -88,16 +87,6 @@ public class UserResponseDTO
 		this.status = status;
 	}
 
-	public String getRole()
-	{
-		return role;
-	}
-
-	public void setRole(String role)
-	{
-		this.role = role;
-	}
-
 	public LocalDateTime getCreatedAt()
 	{
 		return createdAt;
@@ -122,8 +111,8 @@ public class UserResponseDTO
 	public String toString()
 	{
 		return "UserResponseDTO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", contactNum=" + contactNum + ", status=" + status + ", role=" + role + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + "]";
+				+ ", contactNum=" + contactNum + ", status=" + status + ", createdAt=" + createdAt + ", updatedAt="
+				+ updatedAt + "]";
 	}
 
 }
