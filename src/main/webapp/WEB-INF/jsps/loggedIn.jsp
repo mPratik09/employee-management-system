@@ -14,39 +14,38 @@
 	<br />
 	<br />
 	<h4>Welcome ${email}</h4>
-	<br />
-
-	${user.status}
+	<br /> ${user.status}
 	<br />
 	<br />
 	<br /> ${user.id} ${user.firstName} ${user.lastName} ${user.email}
 	${user.contactNum} ${user}
 	<br />
+	<br />
+	<br />
 
 	<form action="makeRequest" method="post">
+		<input type="hidden" name="user_id" value="${user.id}">
+
 		<table border="2">
 			<tr>
 				<td><input type="checkbox" name="depart_code" value="SPRT_01">
-					<input type="hidden" name="user_id" value="${user.id}"> <label>Support</label></td>
+					<label>Support</label></td>
 			</tr>
 			<tr>
 				<td><input type="checkbox" name="depart_code" value="HR_02">
-					<input type="hidden" name="user_id" value="${user.id}"> <label>Human
-						Resource</label></td>
+					<label>Human Resource</label></td>
 			</tr>
 			<tr>
 				<td><input type="checkbox" name="depart_code" value="IT_03">
-					<input type="hidden" name="user_id" value="${user.id}">
 					<label>Information Technology</label></td>
 			</tr>
 			<tr>
 				<td><input type="checkbox" name="depart_code" value="FIN_04">
-				<input type="hidden" name="user_id" value="${user.id}">
 					<label>Finance</label></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="SUbmit" style="float: right">
-				</td>
+				<td><input type="submit" value="Send Request"
+					style="float: right"></td>
 			</tr>
 		</table>
 	</form>
