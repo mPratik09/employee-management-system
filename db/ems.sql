@@ -53,7 +53,7 @@ insert into `status` (id, `status`) values (0, 'UNASSIGNED'), (1, 'PENDING'), (2
 
 SET SESSION sql_mode = CONCAT(@@sql_mode, ',NO_AUTO_VALUE_ON_ZERO');
 insert into users (id, first_name, last_name, email, password, contact_num, `status`) 
-		values(0, "Nebula", "support", "support@nebula.co.in", "{noop}Support@123", "9087654321", "ASSIGNED"),
+		values(0, "Nebula", "support", "support@nebula.co.in", "{noop}Support@123", "9087654321", "APPROVED"),
         (1, "Aman", "Chandra", "aman@nebula.co.in", "{noop}Aman@123", "9090909001", "UNASSIGNED"),
         (2, "Amit", "Bavalekar", "amit@nebula.co.in", "{noop}Amit@123", "9090909004", "UNASSIGNED"),
         (3, "Akshay", "Bhoite", "akshay@nebula.co.in", "{noop}Akshay@123", "9090909006", "UNASSIGNED"),
