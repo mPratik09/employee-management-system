@@ -7,17 +7,21 @@
 <title>Admin</title>
 </head>
 <body>
+
+	<%@ include file="logout.jsp"%>
+
 	<h2>Welcome to ADMIN Page</h2>
 
+	<br />
+	<br />
+	<h2>Registered as an Admin</h2>
 
-	${user.role}
+	<br />
+	<br /> ${user.status}
 	<br />
 	<br />
-	<br />
-	<br />
-	${user.id} ${user.firstName} ${user.lastName} ${user.email}
+	<br /> ${user.id} ${user.firstName} ${user.lastName} ${user.email}
 	${user.contactNum}
-
 
 </body>
 </html>

@@ -25,5 +25,11 @@
 
 	${error}
 
+	<br/><br/><br/>
+	<label>Don't have an account??</label>
+	<br />
+	<a href="registerUser">Click here to Register..</a>
+
+
 </body>
 </html>

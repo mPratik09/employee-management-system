@@ -1,7 +1,6 @@
 package com.employee.management.system.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,21 +38,27 @@ public class UserService
 		return savedUser;
 	}
 
-	public Optional<User> getByUserEmail(String email)
-	{
-
-		Optional<User> user = userRepo.findByUserEmail(email);
-
-		return user;
-
-	}
-
 	public List<User> getPendingUsers()
 	{
 
 		List<User> usersList = userRepo.getPendingUsers();
 
 		return usersList;
+	}
+
+	/*
+	 * not have caller from controller but has calling method inside repo
+	 */
+	public void roleRequest(int userId, int deptId)
+	{
+		userRepo.roleRequest(userId, deptId);
+
+	}
+
+	public void changeStatus(int userId)
+	{
+		userRepo.updateStatus(userId);
+
 	}
 
 }

@@ -3,13 +3,11 @@ package com.employee.management.system.repo;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -32,17 +30,23 @@ public class UserRepo
 	@Value("${FETCH_USER}")
 	private String fetch_user;
 
-	@Value("${FIND_BY_EMAILID}")
-	private String find_by_emailid;
-
 	@Value("${FETCH_PENDING_USERS}")
 	private String fetch_pending_users;
 
-	@Autowired
-	JdbcTemplate jdbcTemplate;
+	@Value("${ROLE_REQUEST}")
+	private String role_request;
+
+	@Value("${ROLE_ASSIGN}")
+	private String role_assign;
+
+	@Value("${CHANGE_STATUS}")
+	private String change_status;
 
 	@Autowired
 	UserMapper userMapper;
+
+	@Autowired
+	JdbcTemplate jdbcTemplate;
 
 	public UserResponseDTO saveUser(User user)
 	{
@@ -53,7 +57,7 @@ public class UserRepo
 			PreparedStatement ps = connection.prepareStatement(persist_user, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, user.getFirstName());
 			ps.setString(2, user.getLastName());
-			ps.setString(3, user.getEmail());
+			ps.setString(3, user.getEmail().toLowerCase());
 			ps.setString(4, user.getPassword());
 			ps.setString(5, user.getContactNum());
 			return ps;
@@ -70,36 +74,26 @@ public class UserRepo
 
 	}
 
-	public Optional<User> findByUserEmail(String email)
-	{
-
-		StringBuilder findByEmailid = new StringBuilder(find_by_emailid);
-		findByEmailid.append("?");
-
-		log.info("SQL query - FIND_BY_EMAILID: {} || email: {}", findByEmailid, email);
-
-//		TODO: fetch the whole user object insted of only password
-		try
-		{
-			User user = jdbcTemplate.queryForObject(findByEmailid.toString(), new BeanPropertyRowMapper<>(User.class),
-					email);
-			return Optional.of(user);
-		} catch (EmptyResultDataAccessException e)
-		{
-			return Optional.empty();
-		}
-
-	}
-
 	public List<User> getPendingUsers()
 	{
-
 		StringBuilder findByStatus = new StringBuilder(fetch_pending_users);
 
 		log.info("SQL query - FETCH_PENDING_USERS:\t{}", findByStatus);
 
 		List<User> pendingUsers = jdbcTemplate.query(fetch_pending_users, new BeanPropertyRowMapper<>(User.class));
 		return pendingUsers;
+	}
+
+	public void roleRequest(int userId, int departId)
+	{
+		jdbcTemplate.update(role_request, userId, departId);
+//		jdbcTemplate.update(role_assign, );
+		return;
+	}
+
+	public void updateStatus(int userId)
+	{
+		jdbcTemplate.update(change_status, userId);
 	}
 
 }

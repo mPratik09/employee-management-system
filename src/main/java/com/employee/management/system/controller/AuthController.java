@@ -1,15 +1,11 @@
 package com.employee.management.system.controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,19 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.employee.management.system.entity.User;
+import com.employee.management.system.service.AuthService;
 import com.employee.management.system.service.UserService;
 
 @Controller
 public class AuthController
 {
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private static Logger log = LoggerFactory.getLogger(AuthController.class);
 
 	@Autowired
 	private UserService userService;
 
-	private static Logger log = LoggerFactory.getLogger(AuthController.class);
+	@Autowired
+	private AuthService authService;
 
 	@GetMapping("/registerUser")
 	public String registerUser()
@@ -54,57 +51,32 @@ public class AuthController
 	public String verifyPassword(@RequestParam("email") String email, @RequestParam("password") String rawPassword,
 			RedirectAttributes redirectAttributes, HttpSession httpSession, Model model)
 	{
-		Optional<User> optionalUser = userService.getByUserEmail(email);
 
-		if (!optionalUser.isPresent())
+		User user = authService.verifyUser(email, rawPassword);
+
+		if (user == null)
 		{
-			log.info("User not found with email: {}", email);
+			model.addAttribute("error", "Invalid email or password");
 			return "login";
 		}
 
-		User user = optionalUser.get();
-
-		if (!doPasswordsMatch(rawPassword, user.getPassword()))
-		{
-			log.info("Password did not match..");
-			redirectAttributes.addFlashAttribute("error", "Invalid email or password");
-			return "redirect:/showLogin";
+		switch (user.getStatus()) {
+		case "UNASSIGNED":
+			log.info("UNASSIGNED...");
+			model.addAttribute("user", user);
+			return "loggedIn";
+		case "PENDING":
+			model.addAttribute("reqPendingMsg", "Your request is still pending.");
+			return "reqPending";
+		case "ASSIGNED":
+			return "redirect:/chooseDepartment";
+		case "REJECTED":
+			model.addAttribute("error", "Your request has been rejected. Please contact higher authority..");
+			return "login";
+		default:
+			return "login";
 		}
 
-		if (user.getStatus().equals("ASSIGNED"))
-		{
-
-			User userWithSession = createSession(httpSession, user);
-
-			if (userWithSession.getRole().equals("SUPPORT"))
-			{
-				List<User> pendingUsersList = userService.getPendingUsers();
-
-				if (pendingUsersList.isEmpty())
-				{
-					model.addAttribute("msg", "No active user found with PENDING status..");
-					return "support";
-				}
-
-				log.info("Pending Users List: {}", pendingUsersList);
-				model.addAttribute("pendingUser", pendingUsersList);
-
-				return "support";
-			} else if (userWithSession.getRole().equals("ADMIN"))
-			{
-				model.addAttribute("user", userWithSession);
-				return "admin";
-			} else
-			{
-				model.addAttribute("user", userWithSession);
-				return "employee";
-			}
-		}
-
-		log.info("User in Auth: {}", user);
-		model.addAttribute("user", user);
-
-		return "loggedIn";
 	}
 
 	@PostMapping("/logout")
@@ -118,7 +90,6 @@ public class AuthController
 
 	private User createSession(HttpSession httpSession, User user)
 	{
-
 		httpSession.setAttribute("userSession", user);
 
 		User userSession = (User) httpSession.getAttribute("userSession");
@@ -129,7 +100,6 @@ public class AuthController
 	@GetMapping("/dashboard")
 	public String dashboard(HttpSession session, HttpServletResponse response)
 	{
-
 		if (session.getAttribute("userSession") == null)
 		{
 			return "redirect:/showLogin";
@@ -141,11 +111,6 @@ public class AuthController
 		response.setDateHeader("Expires", 0);
 
 		return "dashboard";
-	}
-
-	public boolean doPasswordsMatch(String rawPassword, String encodedPassword)
-	{
-		return passwordEncoder.matches(rawPassword, encodedPassword);
 	}
 
 }

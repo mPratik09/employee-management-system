@@ -2,10 +2,14 @@ package com.employee.management.system.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.employee.management.system.service.RoleService;
+import com.employee.management.system.service.UserService;
 
 @Controller
 public class RoleController
@@ -13,26 +17,23 @@ public class RoleController
 
 	private static final Logger log = LoggerFactory.getLogger(RoleController.class);
 
-	@PostMapping("/adminReq")
-	public String adminReq(@RequestParam("id") int id, Model model)
+	@Autowired
+	private RoleService roleService;
+
+	@Autowired
+	private UserService userService;
+
+	@PostMapping("/makeRequest")
+	public String makeRequest(@RequestParam("depart_code") String departCode, @RequestParam("user_id") int userId,
+			Model model)
 	{
-		log.info("Inside ADMIN REQ..");
-		log.info("User id..{}", id);
+		roleService.roleRequest(departCode);
 
-		model.addAttribute("msg", "USer registered as an ADMIN");
+		userService.changeStatus(userId);
 
-		return "assignRole";
-	}
+		model.addAttribute("msg", "Your request sent to Suport person..");
 
-	@PostMapping("/employeeReq")
-	public String employeeReq(@RequestParam("id") int id, Model model)
-	{
-		log.info("Inside EMPLOYEE REQ..");
-		log.info("User id..{}", id);
-
-		model.addAttribute("msg", "USer registered as an EMPLOYEE");
-
-		return "assignRole";
+		return "reqPending";
 	}
 
 }

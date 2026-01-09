@@ -7,7 +7,10 @@
 <title>savedUser HTML</title>
 </head>
 <body>
-	<%@ include file="logout.jsp"%>
-	<h2>User Saved Successfully - HTML</h2>
+	<form action="logout" method="post" style="float: right;">
+		<button type="submit">Back to Login</button>
+	</form>
+	
+	<h2>Employee Registered Successfully!!</h2>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +12,7 @@
 			<tr>
 				<td><label>First Name:</label></td>
 				<td><input type="text" name="firstName"
-					placeholder="Please Enter your user name here.."
-					style="width: 80%;"></td>
+					placeholder="Please Enter your user name here.."></td>
 			</tr>
 			<tr>
 				<td><label>Last Name:</label></td>
@@ -39,15 +38,11 @@
 					placeholder="Re-Enter your password.."></td>
 				</td>
 			</tr>
-			<tr> 
+			<tr>
 				<td><label>Contact Num:</label></td>
 				<td><input type="text" name="contactNum"
 					placeholder="Enter your contact number.."></td>
 				</td>
-			</tr>
-			<tr> 
-				<td><input type="radio"name="admin">ADMIN</td>
-				<td><input type="radio"name="employee">EMPLOYEE</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="right"><input type="Submit"
@@ -55,11 +50,10 @@
 			</tr>
 		</table>
 	</form>
-
-	<label>Don't have an account??</label>
 	<br />
-	<a href="/register">Click here to Register..</a>
-	${error}
-	
+	<br />
+	<label>Already a User??</label>
+	<br />
+	<a href="showLogin">Login here..</a>
 </body>
 </html>

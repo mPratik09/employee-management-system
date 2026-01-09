@@ -8,23 +8,20 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class SupportRepo
+public class RoleRepo
 {
 
-	private static final Logger log = LoggerFactory.getLogger(SupportRepo.class);
-
-	@Value("${ROLE_REQUEST}")
-	private String role_request;
-
-	@Value("${ROLE_ASSIGN}")
-	private String role_assign;
+	private static final Logger log = LoggerFactory.getLogger(RoleRepo.class);
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	public void roleAssign(int userId)
-	{
+	@Value("${GET_REQUEST_FOR_ROLE}")
+	private String get_request_for_role;
 
-		return;
+	public void roleRequest(String departCode)
+	{
+		log.info("Department codes:\t{}", departCode);
 	}
+
 }

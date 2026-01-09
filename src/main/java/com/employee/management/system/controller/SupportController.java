@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,23 +27,24 @@ public class SupportController
 	@Autowired
 	UserService userService;
 
-	@PostMapping("/assignRole")
-	public String assignRole(Model model)
-	{
-//		model.addAttribute("msg", "Your request sen to Suport person..");
-		return "assignRole";
-	}
-
 	@PostMapping("/roleAssign")
-	public String roleAssignment(@RequestParam("id") int id, @RequestParam("role") String role, Model model)
+	public String roleAssignment(@RequestParam("user_id") int userId, @RequestParam("depart_code") String departCode,
+			Model model)
 	{
 		log.info("Inside role assign controller");
-		supportRepo.roleAssign(id);
+		supportRepo.roleAssign(userId);
 
-		log.info("Id {} with role {}", id, role);
+		log.info("Id {} with role {}", userId, departCode);
 		List<User> pendingUsers = userService.getPendingUsers();
 		model.addAttribute("pendingUser", pendingUsers);
 		return "support";
+	}
+
+	@GetMapping("/chooseDepartment")
+	public String chooseDepartment()
+	{
+		log.info("Choose Departmenttt");
+		return "chooseDepartment";
 	}
 
 }

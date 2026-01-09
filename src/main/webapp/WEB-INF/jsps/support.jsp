@@ -37,14 +37,12 @@
 				<td>
 					<form action="roleAssign" method="post">
 						<input type="hidden" name="id" value="${pendingUsers.id}">
-
 						<button type="submit" name="role" value="ADMIN">Admin</button>
 					</form>
 				</td>
 				<td>
 					<form action="roleAssign" method="post">
 						<input type="hidden" name="id" value="${pendingUsers.id}">
-
 						<button type="submit" name="role" value="EMPLOYEE">EMPLOYEE</button>
 					</form>
 				</td>

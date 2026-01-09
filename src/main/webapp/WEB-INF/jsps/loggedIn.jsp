@@ -11,33 +11,44 @@
 	<%@ include file="logout.jsp"%>
 
 	<h2>Logged In Successfully</h2>
-
-	${msg}
-	<h2>Your request is pending.....</h2>
-
-	${user.role}
 	<br />
+	<br />
+	<h4>Welcome ${email}</h4>
+	<br />
+
+	${user.status}
 	<br />
 	<br />
 	<br /> ${user.id} ${user.firstName} ${user.lastName} ${user.email}
 	${user.contactNum} ${user}
+	<br />
 
-	<table>
-		<tr>
-			<td>
-				<form action=assignRole method="post">
-					<!-- 					<input type="hidden" name="id"> -->
-					<%-- 					<input type="hidden" name="id"  value="${user.id}"> --%>
-					<input type="hidden" name="user" value="${user}">
-					<button type="submit">As an Admin??</button>
-				</form>
-			</td>
-			<td>
-				<form action="assignRole" method="post">
-					<input type="hidden" name="id" value="${user.id}">
-					<button type="submit">As an Employee??</button>
-				</form>
-			</td>
-	</table>
+	<form action="makeRequest" method="post">
+		<table border="2">
+			<tr>
+				<td><input type="checkbox" name="depart_code" value="SPRT_01">
+					<input type="hidden" name="user_id" value="${user.id}"> <label>Support</label></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="depart_code" value="HR_02">
+					<input type="hidden" name="user_id" value="${user.id}"> <label>Human
+						Resource</label></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="depart_code" value="IT_03">
+					<input type="hidden" name="user_id" value="${user.id}">
+					<label>Information Technology</label></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="depart_code" value="FIN_04">
+				<input type="hidden" name="user_id" value="${user.id}">
+					<label>Finance</label></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="SUbmit" style="float: right">
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>

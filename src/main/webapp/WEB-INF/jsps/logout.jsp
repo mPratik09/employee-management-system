@@ -8,15 +8,7 @@
 
 
 <style>
-/* .logout-btn {
-	padding: 8px 16px;
-	background-color: red;
-	color: white;
-	text-decoration: none;
-	border-radius: 4px;
-	border: none;
-	cursor: pointer;
-} */
+
 * {
 	margin: 1px;
 	padding: 1px;
