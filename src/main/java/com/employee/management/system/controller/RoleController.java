@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.employee.management.system.service.RoleService;
+import com.employee.management.system.service.StatusService;
 import com.employee.management.system.service.UserService;
 
 @Controller
@@ -23,16 +24,21 @@ public class RoleController
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private StatusService statusService;
+
 	@PostMapping("/makeRequest")
 	public String makeRequest(@RequestParam("depart_code") String departCode, @RequestParam("user_id") int userId,
 			Model model)
 	{
 		roleService.roleRequest(departCode);
+		log.info("user id: {} || depart code: {}", userId, departCode);
 
 		userService.changeStatus(userId);
 
-		model.addAttribute("msg", "Your request sent to Suport person..");
+		statusService.checkStatus(userId);
 
+		model.addAttribute("reqPendingMsg", "Your request sent to Suport person..");
 		return "reqPending";
 	}
 

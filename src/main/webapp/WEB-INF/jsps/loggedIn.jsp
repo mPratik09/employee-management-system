@@ -28,6 +28,10 @@
 
 		<table border="2">
 			<tr>
+				<td><input type="checkbox" name="depart_code" value="ADM_00">
+					<label>Admin</label></td>
+			</tr>
+			<tr>
 				<td><input type="checkbox" name="depart_code" value="SPRT_01">
 					<label>Support</label></td>
 			</tr>

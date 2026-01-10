@@ -15,16 +15,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.employee.management.system.entity.User;
 import com.employee.management.system.service.AuthService;
-import com.employee.management.system.service.UserService;
 
 @Controller
 public class AuthController
 {
 
 	private static Logger log = LoggerFactory.getLogger(AuthController.class);
-
-	@Autowired
-	private UserService userService;
 
 	@Autowired
 	private AuthService authService;
@@ -62,7 +58,6 @@ public class AuthController
 
 		switch (user.getStatus()) {
 		case "UNASSIGNED":
-			log.info("UNASSIGNED...");
 			model.addAttribute("user", user);
 			return "loggedIn";
 		case "PENDING":

@@ -61,10 +61,4 @@ public class AuthRepo
 		return "ASSIGNED";
 	}
 
-	public String checkStatus(Integer id)
-	{
-		String status = jdbcTemplate.queryForObject(fetch_status, String.class, id);
-		return status;
-	}
-
 }

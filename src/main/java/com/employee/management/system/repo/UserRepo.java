@@ -86,7 +86,7 @@ public class UserRepo
 
 	public void roleRequest(int userId, int departId)
 	{
-		jdbcTemplate.update(role_request, userId, departId);
+		jdbcTemplate.update(role_request, userId);
 //		jdbcTemplate.update(role_assign, );
 		return;
 	}

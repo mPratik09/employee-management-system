@@ -27,6 +27,9 @@ public class AuthService
 	@Autowired
 	AuthRepo authRepo;
 
+	@Autowired
+	private StatusService statusService;
+
 	public User verifyUser(String email, String rawPassword)
 	{
 		Optional<User> userOptional = getByUserEmail(email);
@@ -46,8 +49,7 @@ public class AuthService
 			return null;
 		}
 
-		String checkStatus = authRepo.checkStatus(user.getId());
-		log.info("checkStatus:\t{}", checkStatus);
+		statusService.checkStatus(user.getId());
 
 		authRepo.checkDepartment(user.getId());
 
