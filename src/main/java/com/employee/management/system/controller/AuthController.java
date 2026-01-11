@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.employee.management.system.entity.User;
 import com.employee.management.system.service.AuthService;
+import com.employee.management.system.service.DepartmentService;
 
 @Controller
 public class AuthController
@@ -24,6 +25,9 @@ public class AuthController
 
 	@Autowired
 	private AuthService authService;
+
+	@Autowired
+	DepartmentService deparService;
 
 	@GetMapping("/registerUser")
 	public String registerUser()
@@ -63,8 +67,20 @@ public class AuthController
 		case "PENDING":
 			model.addAttribute("reqPendingMsg", "Your request is still pending.");
 			return "reqPending";
-		case "ASSIGNED":
-			return "redirect:/chooseDepartment";
+		/*
+		 * Query:Could it be a situation where a user exists with an APPROVED status but
+		 * does not have an entry in the "emp_temp" table??
+		 */
+		case "APPROVED":
+//			try
+//			{
+			if (deparService.fetchLinkedDepartments(user.getId()).size() > 1)
+				return "redirect:/chooseDepartment";
+			return "login";
+//			} catch (Exception e)
+//			{
+//				log.info("Exception Caught: {}", e);
+//			}
 		case "REJECTED":
 			model.addAttribute("error", "Your request has been rejected. Please contact higher authority..");
 			return "login";

@@ -43,10 +43,10 @@ public class UserRepo
 	private String change_status;
 
 	@Autowired
-	UserMapper userMapper;
+	JdbcTemplate jdbcTemplate;
 
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	UserMapper userMapper;
 
 	public UserResponseDTO saveUser(User user)
 	{
