@@ -24,17 +24,19 @@ create table users (
 
 create table departments (
 	id int primary key auto_increment,
-    depart_code VARCHAR(20) unique,
-	department varchar(50) not null
+    depart_code varchar(20) not null unique,
+    department varchar(25) not null unique,
+    landing_view varchar(25) not null,
+    allowed_view varchar(25) not null
 );
 
 SET SESSION sql_mode = CONCAT(@@sql_mode, ',NO_AUTO_VALUE_ON_ZERO');
-insert into departments (id, depart_code, department) values
-	(0, "ADM_00", "ADMIN"),
-	(1,  "SPRT_01", "Support"),
-	(2,  "HR_02", "Human Resources"),
-    (3, "IT_03", "Information Technology"),
-    (4,  "FIN_04", "Finance");
+insert into departments (id, depart_code, department, landing_view, allowed_view) values
+	(0, "ADM_00", "ADMIN", "admin_dashboard", "ALL_USERS"),
+	(1,  "SPRT_01", "Support", "support_dashboard", "PENDING_USERS"),
+	(2,  "HR_02", "Human Resources", "hr_portal", "HR_USERS"),
+    (3, "IT_03", "Information Technology", "it_console", "TECH_USERS"),
+    (4,  "FIN_04", "Finance", "finance-board", "FINANCE_USERS");
 
 create table emp_depart (
 	emp_id int,
