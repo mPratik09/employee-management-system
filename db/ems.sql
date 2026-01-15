@@ -66,6 +66,8 @@ insert into users (id, first_name, last_name, email, password, contact_num, `sta
         (7, "Sanket", "Pimplikar", "sanket@nebula.co.in", "{noop}Sanket@123", "9090909011", "UNASSIGNED"),
 		(8, "Somnath", "Kumbhar", "somnath@nebula.co.in", "{noop}Somnath@123", "9090909012", "UNASSIGNED"),
 		(9, "Sahil", "Dabhade", "sahil@nebula.co.in", "{noop}Sahil@123", "9090909013", "UNASSIGNED"),
-		(10, "Sushil", "Dabhade", "sushil@nebula.co.in", "{noop}Sushil@123", "9090909014", "UNASSIGNED");
+		(10, "Sushil", "Dabhade", "sushil@nebula.co.in", "{noop}Sushil@123", "9090909014", "UNASSIGNED"),
+        
+        (11, "Jairam", "Kamat", "jairam@nebula.co.in", "{noop}Jairam@123", "9090909013", "APPROVED");
 
-insert into emp_depart values(0, 2);
+insert into emp_depart values(0, 2), (11, 3);

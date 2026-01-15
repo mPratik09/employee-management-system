@@ -75,6 +75,8 @@ public class UserService
 			return userRepo.fetchAllUsers();
 		case "PENDING_USERS":
 			return userRepo.fetchPendingUsers();
+		case "HR_USERS":
+			return userRepo.fetchEmployees();
 		}
 		return null;
 	}

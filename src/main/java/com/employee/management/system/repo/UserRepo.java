@@ -45,6 +45,9 @@ public class UserRepo
 	@Value("${CHANGE_STATUS}")
 	private String change_status;
 
+	@Value("${EMPLOYEES_LIST_FOR_HR}")
+	private String employees_list_for_hr;
+
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
@@ -115,6 +118,14 @@ public class UserRepo
 		log.info("Fethced Pending Users:\t" + pendingUsers);
 
 		return pendingUsers;
+	}
+
+	public List<User> fetchEmployees()
+	{
+		List<User> employeesList = jdbcTemplate.query(employees_list_for_hr, new BeanPropertyRowMapper<>(User.class));
+		log.info("EMployee for HR: {}", employeesList);
+
+		return employeesList;
 	}
 
 }
