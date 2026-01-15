@@ -1,5 +1,7 @@
 package com.employee.management.system.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.employee.management.system.config.DepartmentContext;
 import com.employee.management.system.entity.User;
 import com.employee.management.system.service.AuthService;
 import com.employee.management.system.service.DepartmentService;
+import com.employee.management.system.service.UserService;
 
 @Controller
 public class AuthController
@@ -27,7 +31,10 @@ public class AuthController
 	private AuthService authService;
 
 	@Autowired
-	DepartmentService deparService;
+	DepartmentService departService;
+
+	@Autowired
+	UserService userService;
 
 	@GetMapping("/registerUser")
 	public String registerUser()
@@ -60,33 +67,34 @@ public class AuthController
 			return "login";
 		}
 
+//		String redirectTo = departService.getLandingViewForUser(user);
+
+		model.addAttribute("user", user);
 		switch (user.getStatus()) {
-		case "UNASSIGNED":
-			model.addAttribute("user", user);
-			return "loggedIn";
-		case "PENDING":
+		case UNASSIGNED:
+			return "makeRequest";
+		case PENDING:
 			model.addAttribute("reqPendingMsg", "Your request is still pending.");
 			return "reqPending";
+		case REJECTED:
+			return "login?rejected";
+		case APPROVED:
+
+			DepartmentContext roleBasedRedirect = departService.roleBasedRedirect(user.getId());
+			List<User> loadUsersByAllowedView = userService.loadUsersByAllowedView(roleBasedRedirect.getAllowedView());
+
+			model.addAttribute("usersList", loadUsersByAllowedView);
+
+			return roleBasedRedirect.getLandingPage();
+		}
+
+		model.addAttribute("user", user);
+		return "";
+
 		/*
 		 * Query:Could it be a situation where a user exists with an APPROVED status but
-		 * does not have an entry in the "emp_temp" table??
+		 * does not have an entry in the "emp_temp"(M:N) table??
 		 */
-		case "APPROVED":
-//			try
-//			{
-			if (deparService.fetchLinkedDepartments(user.getId()).size() > 1)
-				return "redirect:/chooseDepartment";
-			return "login";
-//			} catch (Exception e)
-//			{
-//				log.info("Exception Caught: {}", e);
-//			}
-		case "REJECTED":
-			model.addAttribute("error", "Your request has been rejected. Please contact higher authority..");
-			return "login";
-		default:
-			return "login";
-		}
 
 	}
 

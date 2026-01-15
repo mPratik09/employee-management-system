@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 
 public class User
 {
-	private Integer id;
+	private int id;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String password;
 	private String contactNum;
-	private String status;
+	private Status status;
 
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
@@ -75,12 +75,12 @@ public class User
 		this.contactNum = contactNum;
 	}
 
-	public String getStatus()
+	public Status getStatus()
 	{
 		return status;
 	}
 
-	public void setStatus(String status)
+	public void setStatus(Status status)
 	{
 		this.status = status;
 	}

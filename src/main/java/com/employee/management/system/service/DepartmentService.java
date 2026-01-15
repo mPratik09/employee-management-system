@@ -7,7 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.employee.management.system.entity.Department;
+import com.employee.management.system.config.DepartmentContext;
+import com.employee.management.system.entity.User;
 import com.employee.management.system.repo.DepartmentRepo;
 
 @Service
@@ -19,15 +20,51 @@ public class DepartmentService
 	@Autowired
 	DepartmentRepo departRepo;
 
-	public List<Department> fetchLinkedDepartments(int userId)
+	@Autowired
+	private UserService userService;
+
+	public List<String> fetchLinkedDepartments(int userId)
 //	public List<Map<String, Object>> fetchLinkedDepartments(int userId) throws Exception
 	{
-		List<Department> fetchLinkedDepartments = departRepo.fetchLinkedDepartments(userId);
+		List<String> fetchLinkedDepartments = departRepo.fetchLinkedDepartments(userId);
 //		List<Map<String, Object>> fetchLinkedDepartments = departRepo.fetchLinkedDepartments(userId);
 
 		log.info("Size of associated deparments:\t{}", fetchLinkedDepartments.size());
 
 		return fetchLinkedDepartments;
+	}
+
+//	UNUSED METHOD	A-1
+	public String getLandingViewForUser(User user)
+	{
+
+//		switch (user.getStatus()) {
+//		case UNASSIGNED:
+//			return "makeRequest";
+//		case PENDING:
+//			return "reqPending";
+//		case REJECTED:
+//			return "login?rejected";
+//		case APPROVED:
+//			return roleBasedRedirect(user.getId());
+//		}
+		String fetchLinkedDepartments = departRepo.getLandingViewForUser(user.getId());
+		return fetchLinkedDepartments;
+	}
+
+	public DepartmentContext roleBasedRedirect(int userId)
+	{
+		DepartmentContext fetchDepartmentContext = departRepo.fetchDepartmentContext(userId);
+
+		return fetchDepartmentContext;
+	}
+
+//	UNUSED METHOD
+	public String loadVisibleUsers(DepartmentContext fetchDepartmentContext)
+	{
+		List<User> loadUsersByAllowedView = userService.loadUsersByAllowedView(fetchDepartmentContext.getAllowedView());
+
+		return fetchDepartmentContext.getLandingPage();
 	}
 
 }

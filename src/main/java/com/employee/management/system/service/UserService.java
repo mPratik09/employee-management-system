@@ -61,4 +61,22 @@ public class UserService
 
 	}
 
+	public List<User> fetchRecords()
+	{
+		List<User> pendingUsers = userRepo.fetchAllUsers();
+
+		return pendingUsers;
+	}
+
+	public List<User> loadUsersByAllowedView(String allowedView)
+	{
+		switch (allowedView) {
+		case "ALL_USERS":
+			return userRepo.fetchAllUsers();
+		case "PENDING_USERS":
+			return userRepo.fetchPendingUsers();
+		}
+		return null;
+	}
+
 }

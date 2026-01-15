@@ -2,6 +2,8 @@ package com.employee.management.system.response.dto;
 
 import java.time.LocalDateTime;
 
+import com.employee.management.system.entity.Status;
+
 public class UserResponseDTO
 {
 
@@ -10,7 +12,7 @@ public class UserResponseDTO
 	private String lastName;
 	private String email;
 	private String contactNum;
-	private String status;
+	private Status status;
 
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
@@ -77,12 +79,12 @@ public class UserResponseDTO
 		this.contactNum = contactNum;
 	}
 
-	public String getStatus()
+	public Status getStatus()
 	{
 		return status;
 	}
 
-	public void setStatus(String status)
+	public void setStatus(Status status)
 	{
 		this.status = status;
 	}

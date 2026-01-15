@@ -1,5 +1,7 @@
 package com.employee.management.system.request.dto;
 
+import com.employee.management.system.entity.Status;
+
 public class UserRequestDTO
 {
 	private String firstName;
@@ -8,7 +10,7 @@ public class UserRequestDTO
 	private String password;
 	private String reEnterPassword;
 	private String contactNum;
-	private String status;
+	private Status status;
 
 	public String getFirstName()
 	{
@@ -70,12 +72,12 @@ public class UserRequestDTO
 		this.contactNum = contactNum;
 	}
 
-	public String getStatus()
+	public Status getStatus()
 	{
 		return status;
 	}
 
-	public void setStatus(String status)
+	public void setStatus(Status status)
 	{
 		this.status = status;
 	}

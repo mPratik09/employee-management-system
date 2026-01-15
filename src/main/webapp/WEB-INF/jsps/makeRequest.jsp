@@ -18,9 +18,9 @@
 	<br />
 	<br />
 	<br /> ${user.id} ${user.firstName} ${user.lastName} ${user.email}
-	${user.contactNum} ${user}
+	${user.contactNum} 
 	<br />
-	<br />
+	<br />${user}
 	<br />
 
 	<form action="makeRequest" method="post">
@@ -28,23 +28,23 @@
 
 		<table border="2">
 			<tr>
-				<td><input type="checkbox" name="depart_code" value="ADM_00">
+				<td><input type="checkbox" name="depart_code" value="ADM_01">
 					<label>Admin</label></td>
 			</tr>
 			<tr>
-				<td><input type="checkbox" name="depart_code" value="SPRT_01">
+				<td><input type="checkbox" name="depart_code" value="SPRT_02">
 					<label>Support</label></td>
 			</tr>
 			<tr>
-				<td><input type="checkbox" name="depart_code" value="HR_02">
+				<td><input type="checkbox" name="depart_code" value="HR_03">
 					<label>Human Resource</label></td>
 			</tr>
 			<tr>
-				<td><input type="checkbox" name="depart_code" value="IT_03">
+				<td><input type="checkbox" name="depart_code" value="IT_04">
 					<label>Information Technology</label></td>
 			</tr>
 			<tr>
-				<td><input type="checkbox" name="depart_code" value="FIN_04">
+				<td><input type="checkbox" name="depart_code" value="FIN_05">
 					<label>Finance</label></td>
 			</tr>
 			<tr>

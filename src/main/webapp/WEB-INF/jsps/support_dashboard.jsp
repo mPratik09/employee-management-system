@@ -13,6 +13,18 @@
 	<h2>Welcome to SUPPORT Page..</h2>
 	<%@ include file="logout.jsp"%>
 
+	<br />
+	<br /> ${user.status}
+	<br />
+	<br /> ${user.id} ${user.firstName} ${user.lastName} ${user.email}
+	${user.contactNum}
+	<br />
+	<br />${user}
+	<br />
+	<br />
+	<br />
+
+
 	<table border="4">
 		<tr>
 			<th>Id</th>
@@ -27,22 +39,22 @@
 			<p>${msg}</p>
 		</c:if>
 
-		<c:forEach items="${pendingUser}" var="pendingUsers">
+		<c:forEach items="${usersList}" var="user">
 			<tr>
-				<td>${pendingUsers.id}</td>
-				<td>${pendingUsers.firstName}</td>
-				<td>${pendingUsers.lastName}</td>
-				<td>${pendingUsers.email}</td>
+				<td>${user.id}</td>
+				<td>${user.firstName}</td>
+				<td>${user.lastName}</td>
+				<td>${user.email}</td>
 
 				<td>
 					<form action="roleAssign" method="post">
-						<input type="hidden" name="id" value="${pendingUsers.id}">
+						<input type="hidden" name="id" value="${user.id}">
 						<button type="submit" name="role" value="ADMIN">Admin</button>
 					</form>
 				</td>
 				<td>
 					<form action="roleAssign" method="post">
-						<input type="hidden" name="id" value="${pendingUsers.id}">
+						<input type="hidden" name="id" value="${user.id}">
 						<button type="submit" name="role" value="EMPLOYEE">EMPLOYEE</button>
 					</form>
 				</td>

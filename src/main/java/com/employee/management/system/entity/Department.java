@@ -5,7 +5,7 @@ public class Department
 	private int id;
 	private String departCode;
 	private String department;
-	private String landingView;
+	private String landingPage;
 	private String allowedView;
 
 	public int getId()
@@ -38,6 +38,16 @@ public class Department
 		this.department = department;
 	}
 
+	public String getLandingPage()
+	{
+		return landingPage;
+	}
+
+	public void setLandingPage(String landingPage)
+	{
+		this.landingPage = landingPage;
+	}
+
 	public String getAllowedView()
 	{
 		return allowedView;
@@ -51,8 +61,8 @@ public class Department
 	@Override
 	public String toString()
 	{
-		return "Department [id=" + id + ", departCode=" + departCode + ", department=" + department + ", landingView="
-				+ landingView + ", allowedView=" + allowedView + "]";
+		return "Department [id=" + id + ", departCode=" + departCode + ", department=" + department + ", landingPage="
+				+ landingPage + ", allowedView=" + allowedView + "]";
 	}
 
 }

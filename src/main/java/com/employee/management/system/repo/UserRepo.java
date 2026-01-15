@@ -30,6 +30,9 @@ public class UserRepo
 	@Value("${FETCH_USER}")
 	private String fetch_user;
 
+	@Value("${FETCH_USERS}")
+	private String fetch_users;
+
 	@Value("${FETCH_PENDING_USERS}")
 	private String fetch_pending_users;
 
@@ -94,6 +97,24 @@ public class UserRepo
 	public void updateStatus(int userId)
 	{
 		jdbcTemplate.update(change_status, userId);
+	}
+
+	public List<User> fetchAllUsers()
+	{
+		List<User> pendingUsers = jdbcTemplate.query(fetch_users, new BeanPropertyRowMapper<>(User.class));
+
+		log.info("All Users:\t{}", pendingUsers);
+
+		return pendingUsers;
+
+	}
+
+	public List<User> fetchPendingUsers()
+	{
+		List<User> pendingUsers = jdbcTemplate.query(fetch_pending_users, new BeanPropertyRowMapper<>(User.class));
+		log.info("Fethced Pending Users:\t" + pendingUsers);
+
+		return pendingUsers;
 	}
 
 }
