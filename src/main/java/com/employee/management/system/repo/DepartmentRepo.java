@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.employee.management.system.config.DepartmentContext;
+import com.employee.management.system.entity.Department;
 
 @Repository
 public class DepartmentRepo
@@ -26,6 +27,17 @@ public class DepartmentRepo
 
 	@Value("${FETCH_LINKED_DEPARTMENT}")
 	private String fetch_linked_department;
+
+	@Value("${FETCH_DEPARTMENTS}")
+	private String fetch_departments;
+
+	public List<Department> fetchDepartments()
+	{
+		List<Department> departments = jdbcTemplate.query(fetch_departments,
+				new BeanPropertyRowMapper<>(Department.class));
+
+		return departments;
+	}
 
 	public List<String> fetchLinkedDepartments(int userId)
 //	public List<Map<String, Object>> fetchLinkedDepartments(int userId)

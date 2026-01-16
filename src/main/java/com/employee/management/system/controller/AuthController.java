@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.employee.management.system.config.DepartmentContext;
+import com.employee.management.system.entity.Department;
 import com.employee.management.system.entity.User;
 import com.employee.management.system.service.AuthService;
 import com.employee.management.system.service.DepartmentService;
@@ -72,6 +73,9 @@ public class AuthController
 		model.addAttribute("user", user);
 		switch (user.getStatus()) {
 		case UNASSIGNED:
+			List<Department> fetchedDepartments = departService.fetchDepartments();
+
+			model.addAttribute("departmentsList", fetchedDepartments);
 			return "makeRequest";
 		case PENDING:
 			model.addAttribute("reqPendingMsg", "Your request is still pending.");

@@ -61,7 +61,7 @@ public class Department
 	@Override
 	public String toString()
 	{
-		return "Department [id=" + id + ", departCode=" + departCode + ", department=" + department + ", landingPage="
+		return "\nDepartment [id=" + id + ", departCode=" + departCode + ", department=" + department + ", landingPage="
 				+ landingPage + ", allowedView=" + allowedView + "]";
 	}
 

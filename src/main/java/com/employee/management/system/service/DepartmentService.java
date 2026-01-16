@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.employee.management.system.config.DepartmentContext;
+import com.employee.management.system.entity.Department;
 import com.employee.management.system.entity.User;
 import com.employee.management.system.repo.DepartmentRepo;
 
@@ -65,6 +66,13 @@ public class DepartmentService
 		List<User> loadUsersByAllowedView = userService.loadUsersByAllowedView(fetchDepartmentContext.getAllowedView());
 
 		return fetchDepartmentContext.getLandingPage();
+	}
+
+	public List<Department> fetchDepartments()
+	{
+		List<Department> departmentsList = departRepo.fetchDepartments();
+		log.info("List of All Departments: {}", departmentsList);
+		return departmentsList;
 	}
 
 }

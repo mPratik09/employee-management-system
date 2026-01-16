@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,35 +20,19 @@
 	<br />
 	<br />
 	<br /> ${user.id} ${user.firstName} ${user.lastName} ${user.email}
-	${user.contactNum} 
+	${user.contactNum}
 	<br />
 	<br />${user}
 	<br />
-
 	<form action="makeRequest" method="post">
-		<input type="hidden" name="user_id" value="${user.id}">
-
+		<input type="hidden" name="empId" value="${user.id}">
 		<table border="2">
-			<tr>
-				<td><input type="checkbox" name="depart_code" value="ADM_01">
-					<label>Admin</label></td>
-			</tr>
-			<tr>
-				<td><input type="checkbox" name="depart_code" value="SPRT_02">
-					<label>Support</label></td>
-			</tr>
-			<tr>
-				<td><input type="checkbox" name="depart_code" value="HR_03">
-					<label>Human Resource</label></td>
-			</tr>
-			<tr>
-				<td><input type="checkbox" name="depart_code" value="IT_04">
-					<label>Information Technology</label></td>
-			</tr>
-			<tr>
-				<td><input type="checkbox" name="depart_code" value="FIN_05">
-					<label>Finance</label></td>
-			</tr>
+			<c:forEach var="dept" items="${departmentsList}">
+				<tr>
+					<td><input type="checkbox" name="departIds" value="${dept.id}"><label>
+							${dept.department} </label></td>
+				</tr>
+			</c:forEach>
 			<tr>
 				<td><input type="submit" value="Send Request"
 					style="float: right"></td>
