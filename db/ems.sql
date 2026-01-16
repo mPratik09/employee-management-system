@@ -49,6 +49,20 @@ create table emp_depart (
 SET SESSION sql_mode = CONCAT(@@sql_mode, ',NO_AUTO_VALUE_ON_ZERO');
 insert into `status` (id, `status`) values (0, 'UNASSIGNED'), (1, 'PENDING'), (2, 'APPROVED'), (3, 'REJECTED');
 
+create table emp_depart_requests (
+    id int not null auto_increment primary key,
+    emp_id int not null,
+    depart_id int not null,
+    status varchar(10) not null default 'PENDING',
+    requested_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_udr_user FOREIGN KEY (emp_id) REFERENCES users(id),
+    CONSTRAINT fk_udr_department FOREIGN KEY (depart_id) REFERENCES departments(id),
+    CONSTRAINT fk_udr_status FOREIGN KEY (status) REFERENCES status(status),
+    UNIQUE KEY uk_user_department (emp_id, depart_id)
+);
+
 -- ------------ QUERIES --------------
 
 -- users table inserts

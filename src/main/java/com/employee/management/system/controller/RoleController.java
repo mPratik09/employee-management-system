@@ -1,5 +1,7 @@
 package com.employee.management.system.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.employee.management.system.service.DepartmentService;
 import com.employee.management.system.service.RoleService;
 import com.employee.management.system.service.StatusService;
 import com.employee.management.system.service.UserService;
@@ -27,16 +30,18 @@ public class RoleController
 	@Autowired
 	private StatusService statusService;
 
+	@Autowired
+	private DepartmentService departmentService;
+
 	@PostMapping("/makeRequest")
-	public String makeRequest(@RequestParam("depart_code") String departCode, @RequestParam("user_id") int userId,
+	public String makeRequest(@RequestParam("departIds") List<Integer> departIds, @RequestParam("empId") int empId,
 			Model model)
 	{
-		roleService.roleRequest(departCode);
-		log.info("user id: {} || depart code: {}", userId, departCode);
+		userService.changeStatus(empId);
 
-		userService.changeStatus(userId);
+		statusService.checkStatus(empId);
 
-		statusService.checkStatus(userId);
+		departmentService.makeRequest(empId, departIds);
 
 		model.addAttribute("reqPendingMsg", "Your request sent to Suport person..");
 		return "reqPending";

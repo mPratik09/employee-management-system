@@ -31,6 +31,9 @@ public class DepartmentRepo
 	@Value("${FETCH_DEPARTMENTS}")
 	private String fetch_departments;
 
+	@Value("${DEPARTMENT_REQUEST}")
+	private String department_request;
+
 	public List<Department> fetchDepartments()
 	{
 		List<Department> departments = jdbcTemplate.query(fetch_departments,
@@ -66,6 +69,14 @@ public class DepartmentRepo
 		log.info("Fetched Department:\t{}", departmentContext);
 
 		return departmentContext;
+	}
+
+	public void makeRequest(int userId, List<Integer> departIds)
+	{
+		for (Integer dId : departIds)
+		{
+			jdbcTemplate.update(department_request, userId, dId);
+		}
 	}
 
 }
