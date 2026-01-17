@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.employee.management.system.config.DepartmentContext;
 import com.employee.management.system.entity.Department;
 import com.employee.management.system.entity.User;
+import com.employee.management.system.request.dto.DepartmentRequestDTO;
 import com.employee.management.system.service.AuthService;
 import com.employee.management.system.service.DepartmentService;
 import com.employee.management.system.service.UserService;
@@ -85,7 +86,8 @@ public class AuthController
 		case APPROVED:
 
 			DepartmentContext roleBasedRedirect = departService.roleBasedRedirect(user.getId());
-			List<User> loadUsersByAllowedView = userService.loadUsersByAllowedView(roleBasedRedirect.getAllowedView());
+			List<DepartmentRequestDTO> loadUsersByAllowedView = userService
+					.loadUsersByAllowedView(roleBasedRedirect.getAllowedView());
 
 			model.addAttribute("usersList", loadUsersByAllowedView);
 

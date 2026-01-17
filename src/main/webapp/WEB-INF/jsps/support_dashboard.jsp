@@ -31,6 +31,8 @@
 			<th>First Name</th>
 			<th>Last Name</th>
 			<th>Email</th>
+			<th>Requested For</th>
+			<th>Status</th>
 			<th>Approve</th>
 			<th>Reject</th>
 		</tr>
@@ -45,17 +47,18 @@
 				<td>${user.firstName}</td>
 				<td>${user.lastName}</td>
 				<td>${user.email}</td>
-
+				<td>${user.department}</td>
+				<td>${user.status}</td>
 				<td>
 					<form action="roleAssign" method="post">
 						<input type="hidden" name="id" value="${user.id}">
-						<button type="submit" name="role" value="ADMIN">Admin</button>
+						<button type="submit" name="role">APPROVE</button>
 					</form>
 				</td>
 				<td>
 					<form action="roleAssign" method="post">
 						<input type="hidden" name="id" value="${user.id}">
-						<button type="submit" name="role" value="EMPLOYEE">EMPLOYEE</button>
+						<button type="submit" name="role">REJECT</button>
 					</form>
 				</td>
 			</tr>

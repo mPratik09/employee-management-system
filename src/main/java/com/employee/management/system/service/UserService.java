@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.employee.management.system.entity.User;
 import com.employee.management.system.repo.UserRepo;
+import com.employee.management.system.request.dto.DepartmentRequestDTO;
 import com.employee.management.system.response.dto.UserResponseDTO;
 import com.employee.management.system.validator.UserValidator;
 
@@ -68,15 +69,15 @@ public class UserService
 		return pendingUsers;
 	}
 
-	public List<User> loadUsersByAllowedView(String allowedView)
+	public List<DepartmentRequestDTO> loadUsersByAllowedView(String allowedView)
 	{
 		switch (allowedView) {
-		case "ALL_USERS":
-			return userRepo.fetchAllUsers();
+//		case "ALL_USERS":
+//			return userRepo.fetchAllUsers();
 		case "PENDING_USERS":
 			return userRepo.fetchPendingUsers();
-		case "HR_USERS":
-			return userRepo.fetchEmployees();
+//		case "HR_USERS":
+//			return userRepo.fetchEmployees();
 		}
 		return null;
 	}

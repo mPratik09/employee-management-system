@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.employee.management.system.entity.User;
 import com.employee.management.system.mapper.UserMapper;
+import com.employee.management.system.request.dto.DepartmentRequestDTO;
 import com.employee.management.system.response.dto.UserResponseDTO;
 
 @Repository
@@ -112,9 +113,10 @@ public class UserRepo
 
 	}
 
-	public List<User> fetchPendingUsers()
+	public List<DepartmentRequestDTO> fetchPendingUsers()
 	{
-		List<User> pendingUsers = jdbcTemplate.query(fetch_pending_users, new BeanPropertyRowMapper<>(User.class));
+		List<DepartmentRequestDTO> pendingUsers = jdbcTemplate.query(fetch_pending_users,
+				new BeanPropertyRowMapper<>(DepartmentRequestDTO.class));
 		log.info("Fethced Pending Users:\t" + pendingUsers);
 
 		return pendingUsers;
