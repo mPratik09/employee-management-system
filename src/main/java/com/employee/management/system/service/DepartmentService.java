@@ -11,7 +11,7 @@ import com.employee.management.system.config.DepartmentContext;
 import com.employee.management.system.entity.Department;
 import com.employee.management.system.entity.User;
 import com.employee.management.system.repo.DepartmentRepo;
-import com.employee.management.system.request.dto.DepartmentRequestDTO;
+import com.employee.management.system.request.dto.ViewUsersDTO;
 
 @Service
 public class DepartmentService
@@ -64,7 +64,7 @@ public class DepartmentService
 //	UNUSED METHOD
 	public String loadVisibleUsers(DepartmentContext fetchDepartmentContext)
 	{
-		List<DepartmentRequestDTO> loadUsersByAllowedView = userService
+		List<ViewUsersDTO> loadUsersByAllowedView = userService
 				.loadUsersByAllowedView(fetchDepartmentContext.getAllowedView());
 
 		return fetchDepartmentContext.getLandingPage();

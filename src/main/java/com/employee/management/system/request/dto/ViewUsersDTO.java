@@ -2,7 +2,7 @@ package com.employee.management.system.request.dto;
 
 import com.employee.management.system.entity.Status;
 
-public class DepartmentRequestDTO
+public class ViewUsersDTO
 {
 	private int id;
 	private int empId;

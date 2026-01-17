@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.employee.management.system.entity.User;
 import com.employee.management.system.mapper.UserMapper;
-import com.employee.management.system.request.dto.DepartmentRequestDTO;
+import com.employee.management.system.request.dto.ViewUsersDTO;
 import com.employee.management.system.response.dto.UserResponseDTO;
 
 @Repository
@@ -103,9 +103,10 @@ public class UserRepo
 		jdbcTemplate.update(change_status, userId);
 	}
 
-	public List<User> fetchAllUsers()
+	public List<ViewUsersDTO> fetchAllUsers()
 	{
-		List<User> pendingUsers = jdbcTemplate.query(fetch_users, new BeanPropertyRowMapper<>(User.class));
+		List<ViewUsersDTO> pendingUsers = jdbcTemplate.query(fetch_users,
+				new BeanPropertyRowMapper<>(ViewUsersDTO.class));
 
 		log.info("All Users:\t{}", pendingUsers);
 
@@ -113,18 +114,19 @@ public class UserRepo
 
 	}
 
-	public List<DepartmentRequestDTO> fetchPendingUsers()
+	public List<ViewUsersDTO> fetchPendingUsers()
 	{
-		List<DepartmentRequestDTO> pendingUsers = jdbcTemplate.query(fetch_pending_users,
-				new BeanPropertyRowMapper<>(DepartmentRequestDTO.class));
+		List<ViewUsersDTO> pendingUsers = jdbcTemplate.query(fetch_pending_users,
+				new BeanPropertyRowMapper<>(ViewUsersDTO.class));
 		log.info("Fethced Pending Users:\t" + pendingUsers);
 
 		return pendingUsers;
 	}
 
-	public List<User> fetchEmployees()
+	public List<ViewUsersDTO> fetchEmployees()
 	{
-		List<User> employeesList = jdbcTemplate.query(employees_list_for_hr, new BeanPropertyRowMapper<>(User.class));
+		List<ViewUsersDTO> employeesList = jdbcTemplate.query(employees_list_for_hr,
+				new BeanPropertyRowMapper<>(ViewUsersDTO.class));
 		log.info("EMployee for HR: {}", employeesList);
 
 		return employeesList;
