@@ -28,7 +28,6 @@
 	<br />${user}
 	<br />
 	<br />
-	<br />
 
 	<table border="4">
 		<tr>
@@ -36,8 +35,6 @@
 			<th>First Name</th>
 			<th>Last Name</th>
 			<th>Email</th>
-			<th>Approve</th>
-			<th>Reject</th>
 		</tr>
 
 		<c:if test="${not empty msg}">
@@ -67,7 +64,6 @@
 		</c:forEach>
 
 	</table>
-
 
 </body>
 </html>
