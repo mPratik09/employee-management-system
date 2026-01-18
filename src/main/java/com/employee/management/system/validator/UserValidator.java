@@ -23,7 +23,7 @@ public class UserValidator
 		}
 
 		log.info("Invalid Email id..");
-		return false;
+		throw new IllegalArgumentException("INVALID EMAIL ID..");
 	}
 
 	public boolean isValidPassword(String password)
@@ -51,8 +51,9 @@ public class UserValidator
 			log.info("Valid contact number..");
 			return true;
 		}
+
 		log.info("Invalid contact number..");
-		return false;
+		throw new IllegalArgumentException("INVALID CONTACT NUMBER..");
 	}
 
 	public boolean isUserValid(User user)

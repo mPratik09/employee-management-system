@@ -51,6 +51,7 @@
 		</table>
 	</form>
 	<br />
+	${error}
 	<br />
 	<label>Already a User??</label>
 	<br />
