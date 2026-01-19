@@ -56,10 +56,14 @@ public class UserService
 
 	}
 
-	public void changeStatus(int userId)
+	public void changeStatusToPending(int userId)
 	{
-		userRepo.updateStatus(userId);
+		userRepo.updateStatusToPending(userId);
+	}
 
+	public void changeStatusToApproved(int userId)
+	{
+		userRepo.updateStatusToApproved(userId);
 	}
 
 	public List<ViewUsersDTO> fetchRecords()
@@ -80,6 +84,32 @@ public class UserService
 			return userRepo.fetchEmployees();
 		}
 		return null;
+	}
+
+	public void makeRequest(int userId, int departIds)
+	{
+		userRepo.makeRequest(userId, departIds);
+	}
+
+	public void approveRequest(int userId, int departId)
+	{
+		userRepo.approveRequest(userId, departId);
+	}
+
+	public void updateStatusToApproved(int empId)
+	{
+		userRepo.updateStatusToApproved(empId);
+	}
+
+	public void deleteEntryFromDepartReq(int empId, int departId)
+	{
+		userRepo.deleteEntryFromDepartReq(empId, departId);
+	}
+
+	public List<ViewUsersDTO> fetchPendingUsers()
+	{
+		List<ViewUsersDTO> pendingUsersList = userRepo.fetchPendingUsers();
+		return pendingUsersList;
 	}
 
 }

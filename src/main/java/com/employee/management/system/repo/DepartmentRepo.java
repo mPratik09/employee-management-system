@@ -19,20 +19,17 @@ public class DepartmentRepo
 
 	private static final Logger log = LoggerFactory.getLogger(DepartmentRepo.class);
 
-	@Value("${FETCH_LANDING_PAGE}")
-	private String fetch_landing_page;
-
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+
+	@Value("${FETCH_LANDING_PAGE}")
+	private String fetch_landing_page;
 
 	@Value("${FETCH_LINKED_DEPARTMENT}")
 	private String fetch_linked_department;
 
 	@Value("${FETCH_DEPARTMENTS}")
 	private String fetch_departments;
-
-	@Value("${DEPARTMENT_REQUEST}")
-	private String department_request;
 
 	public List<Department> fetchDepartments()
 	{
@@ -69,14 +66,6 @@ public class DepartmentRepo
 		log.info("Fetched Department:\t{}", departmentContext);
 
 		return departmentContext;
-	}
-
-	public void makeRequest(int userId, List<Integer> departIds)
-	{
-		for (Integer dId : departIds)
-		{
-			jdbcTemplate.update(department_request, userId, dId);
-		}
 	}
 
 }

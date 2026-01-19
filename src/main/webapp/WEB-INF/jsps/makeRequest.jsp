@@ -29,7 +29,7 @@
 		<table border="2">
 			<c:forEach var="dept" items="${departmentsList}">
 				<tr>
-					<td><input type="checkbox" name="departIds" value="${dept.id}"><label>
+					<td><input type="radio" name="departId" value="${dept.id}"><label>
 							${dept.department} </label></td>
 				</tr>
 			</c:forEach>

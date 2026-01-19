@@ -77,9 +77,4 @@ public class DepartmentService
 		return departmentsList;
 	}
 
-	public void makeRequest(int userId, List<Integer> departIds)
-	{
-		departRepo.makeRequest(userId, departIds);
-	}
-
 }

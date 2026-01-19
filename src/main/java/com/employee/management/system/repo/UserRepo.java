@@ -43,11 +43,23 @@ public class UserRepo
 	@Value("${ROLE_ASSIGN}")
 	private String role_assign;
 
-	@Value("${CHANGE_STATUS}")
-	private String change_status;
+	@Value("${CHANGE_STATUS_TO_PENDING}")
+	private String change_status_to_pending;
+
+	@Value("${CHANGE_STATUS_TO_APPROVED}")
+	private String change_status_to_approved;
 
 	@Value("${EMPLOYEES_LIST_FOR_HR}")
 	private String employees_list_for_hr;
+
+	@Value("${DELETE_ENTRY_FOR_DEPARTMENT_REQUEST}")
+	private String delete_entry_for_department_request;
+
+	@Value("${DEPARTMENT_REQUEST}")
+	private String department_request;
+
+	@Value("${DEPARTMENT_REQUEST_APPROVE}")
+	private String department_request_approve;
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -98,9 +110,14 @@ public class UserRepo
 		return;
 	}
 
-	public void updateStatus(int userId)
+	public void updateStatusToApproved(int userId)
 	{
-		jdbcTemplate.update(change_status, userId);
+		jdbcTemplate.update(change_status_to_approved, userId);
+	}
+
+	public void updateStatusToPending(int userId)
+	{
+		jdbcTemplate.update(change_status_to_pending, userId);
 	}
 
 	public List<ViewUsersDTO> fetchAllUsers()
@@ -130,6 +147,23 @@ public class UserRepo
 		log.info("EMployee for HR: {}", employeesList);
 
 		return employeesList;
+	}
+
+	public void deleteEntryFromDepartReq(int empId, int departId)
+	{
+		jdbcTemplate.update(delete_entry_for_department_request, empId, departId);
+
+	}
+
+	public void makeRequest(int userId, int departId)
+	{
+		jdbcTemplate.update(department_request, userId, departId);
+	}
+
+	public void approveRequest(int userId, int departId)
+	{
+		jdbcTemplate.update(department_request_approve, userId, departId);
+
 	}
 
 }

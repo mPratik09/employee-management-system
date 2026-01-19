@@ -54,8 +54,9 @@
 				<td>${user.department}</td>
 				<td>${user.status}</td>
 				<td>
-					<form action="roleAssign" method="post">
-						<input type="hidden" name="id" value="${user.id}">
+					<form action="approveReq" method="post">
+						<input type="hidden" name="empId" value="${user.empId}">
+						<input type="hidden" name="departId" value="${user.departId}">
 						<button type="submit" name="role">APPROVE</button>
 					</form>
 				</td>

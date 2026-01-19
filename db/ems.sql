@@ -46,6 +46,16 @@ create table emp_depart (
 	foreign key (depart_id) references departments(id)
 );
 
+--  to be added-- below will replace above table's schema
+-- create table emp_depart (
+--     id int auto_increment primary key,
+--     emp_id int not null,
+--     depart_id int not null,
+--     unique key uk_emp_depart (emp_id, depart_id),
+--     foreign key (emp_id) references users(id),
+--     foreign key (depart_id) references departments(id)
+-- );
+
 SET SESSION sql_mode = CONCAT(@@sql_mode, ',NO_AUTO_VALUE_ON_ZERO');
 insert into `status` (id, `status`) values (0, 'UNASSIGNED'), (1, 'PENDING'), (2, 'APPROVED'), (3, 'REJECTED');
 
