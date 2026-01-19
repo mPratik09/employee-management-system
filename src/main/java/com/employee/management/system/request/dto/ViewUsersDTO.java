@@ -9,6 +9,7 @@ public class ViewUsersDTO
 	private String firstName;
 	private String lastName;
 	private String email;
+	private int departId;
 	private String department;
 	private Status status;
 
@@ -62,6 +63,16 @@ public class ViewUsersDTO
 		this.email = email;
 	}
 
+	public int getDepartId()
+	{
+		return departId;
+	}
+
+	public void setDepartId(int departId)
+	{
+		this.departId = departId;
+	}
+
 	public String getDepartment()
 	{
 		return department;
@@ -85,8 +96,9 @@ public class ViewUsersDTO
 	@Override
 	public String toString()
 	{
-		return "\nDepartmentRequestDTO [id=" + id + ", empId=" + empId + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", email=" + email + ", department=" + department + ", status=" + status + "]";
+		return "\nViewUsersDTO [id=" + id + ", empId=" + empId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", departId=" + departId + ", department=" + department + ", status=" + status
+				+ "]";
 	}
 
 }

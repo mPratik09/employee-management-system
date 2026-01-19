@@ -28,9 +28,11 @@
 	<table border="4">
 		<tr>
 			<th>Id</th>
+			<th>Emp Id</th>
 			<th>First Name</th>
 			<th>Last Name</th>
 			<th>Email</th>
+			<th>Depart Id</th>
 			<th>Requested For</th>
 			<th>Status</th>
 			<th>Approve</th>
@@ -44,9 +46,11 @@
 		<c:forEach items="${usersList}" var="user">
 			<tr>
 				<td>${user.id}</td>
+				<td>${user.empId}</td>
 				<td>${user.firstName}</td>
 				<td>${user.lastName}</td>
 				<td>${user.email}</td>
+				<td>${user.departId}</td>
 				<td>${user.department}</td>
 				<td>${user.status}</td>
 				<td>
