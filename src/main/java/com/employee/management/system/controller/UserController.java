@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.employee.management.system.entity.User;
 import com.employee.management.system.mapper.UserMapper;
+import com.employee.management.system.repo.UserRepo;
 import com.employee.management.system.request.dto.UserRequestDTO;
 import com.employee.management.system.request.dto.ViewUsersDTO;
 import com.employee.management.system.response.dto.UserResponseDTO;
@@ -31,6 +33,9 @@ public class UserController
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	UserRepo userRepo;
 
 	@Autowired
 	private StatusService statusService;
@@ -99,13 +104,25 @@ public class UserController
 	}
 
 	@PostMapping("/updateEmp")
-	public String updateEmpployee(@RequestParam("empId") int empId, RedirectAttributes redirectAttributes)
+	public String updateEmpployee(@RequestParam("empId") int empId, Model model)
 	{
-
-		log.info("Employee Id: {}", empId);
 		UserUpdateDTO updateEmployee = userService.updateEmployee(empId);
 
-		redirectAttributes.addFlashAttribute("updateEmployee", updateEmployee);
-		return "upadteEmployee";
+		log.info("User to be updated: {}", updateEmployee);
+		model.addAttribute("updateEmployee", updateEmployee);
+
+		return "updateEmpForm";
+	}
+
+	@PostMapping("/saveUpdatedEmp")
+	public String saveUpdatedEmp(@ModelAttribute UserUpdateDTO userUpdateDTO, ModelMap modelMap)
+	{
+		userService.saveUpdatedEmployee(userUpdateDTO);
+
+		List<ViewUsersDTO> pendingUsersList = userService.fetchPendingUsers();
+		modelMap.addAttribute("msg", "User updated succesfully..");
+		modelMap.addAttribute("usersList", pendingUsersList);
+
+		return "support_dashboard";
 	}
 }

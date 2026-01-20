@@ -119,4 +119,10 @@ public class UserService
 		return updateEmployee;
 	}
 
+	public UserResponseDTO saveUpdatedEmployee(UserUpdateDTO userUpdateDTO)
+	{
+		UserResponseDTO saveUpdatedEmployee = userRepo.saveUpdatedEmployee(userUpdateDTO);
+		return saveUpdatedEmployee;
+	}
+
 }

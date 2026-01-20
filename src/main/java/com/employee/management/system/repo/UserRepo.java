@@ -62,6 +62,9 @@ public class UserRepo
 	@Value("${DEPARTMENT_REQUEST_APPROVE}")
 	private String department_request_approve;
 
+	@Value("${SAVE_UPDATED_EMPLOYEE}")
+	private String save_updated_employee;
+
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
@@ -172,6 +175,27 @@ public class UserRepo
 		UserUpdateDTO updateUser = jdbcTemplate.queryForObject(fetch_user,
 				new BeanPropertyRowMapper<>(UserUpdateDTO.class), empId);
 		return updateUser;
+	}
+
+	public UserResponseDTO saveUpdatedEmployee(UserUpdateDTO userUpdateDto)
+	{
+		jdbcTemplate.update(connection ->
+		{
+			PreparedStatement ps = connection.prepareStatement(save_updated_employee);
+			ps.setString(1, userUpdateDto.getFirstName());
+			ps.setString(2, userUpdateDto.getLastName());
+			ps.setString(3, userUpdateDto.getEmail().toLowerCase());
+			ps.setString(4, userUpdateDto.getContactNum());
+			ps.setInt(5, userUpdateDto.getId());
+			return ps;
+		});
+
+//		fetches row from database by id 
+		User updatedUser = jdbcTemplate.queryForObject(fetch_user, new BeanPropertyRowMapper<>(User.class),
+				userUpdateDto.getId());
+
+		return userMapper.userDtoMapper(updatedUser);
+
 	}
 
 }
