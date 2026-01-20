@@ -37,6 +37,7 @@
 			<th>Status</th>
 			<th>Approve</th>
 			<th>Reject</th>
+			<th>Update</th>
 		</tr>
 
 		<c:if test="${not empty msg}">
@@ -64,6 +65,12 @@
 					<form action="roleAssign" method="post">
 						<input type="hidden" name="id" value="${user.id}">
 						<button type="submit" name="role">REJECT</button>
+					</form>
+				</td>
+				<td>
+					<form action="updateEmp" method="post">
+						<input type="hidden" name="empId" value="${user.empId}">
+						<button type="submit">UPDATE</button>
 					</form>
 				</td>
 			</tr>

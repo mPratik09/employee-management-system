@@ -18,6 +18,7 @@ import com.employee.management.system.mapper.UserMapper;
 import com.employee.management.system.request.dto.UserRequestDTO;
 import com.employee.management.system.request.dto.ViewUsersDTO;
 import com.employee.management.system.response.dto.UserResponseDTO;
+import com.employee.management.system.response.dto.UserUpdateDTO;
 import com.employee.management.system.service.StatusService;
 import com.employee.management.system.service.UserService;
 
@@ -97,4 +98,14 @@ public class UserController
 		return "support_dashboard";
 	}
 
+	@PostMapping("/updateEmp")
+	public String updateEmpployee(@RequestParam("empId") int empId, RedirectAttributes redirectAttributes)
+	{
+
+		log.info("Employee Id: {}", empId);
+		UserUpdateDTO updateEmployee = userService.updateEmployee(empId);
+
+		redirectAttributes.addFlashAttribute("updateEmployee", updateEmployee);
+		return "upadteEmployee";
+	}
 }

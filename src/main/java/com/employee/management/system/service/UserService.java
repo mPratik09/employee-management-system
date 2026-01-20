@@ -11,6 +11,7 @@ import com.employee.management.system.entity.User;
 import com.employee.management.system.repo.UserRepo;
 import com.employee.management.system.request.dto.ViewUsersDTO;
 import com.employee.management.system.response.dto.UserResponseDTO;
+import com.employee.management.system.response.dto.UserUpdateDTO;
 import com.employee.management.system.validator.UserValidator;
 
 @Service
@@ -110,6 +111,12 @@ public class UserService
 	{
 		List<ViewUsersDTO> pendingUsersList = userRepo.fetchPendingUsers();
 		return pendingUsersList;
+	}
+
+	public UserUpdateDTO updateEmployee(int empId)
+	{
+		UserUpdateDTO updateEmployee = userRepo.updateEmployee(empId);
+		return updateEmployee;
 	}
 
 }

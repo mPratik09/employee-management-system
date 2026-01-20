@@ -18,6 +18,7 @@ import com.employee.management.system.entity.User;
 import com.employee.management.system.mapper.UserMapper;
 import com.employee.management.system.request.dto.ViewUsersDTO;
 import com.employee.management.system.response.dto.UserResponseDTO;
+import com.employee.management.system.response.dto.UserUpdateDTO;
 
 @Repository
 public class UserRepo
@@ -164,6 +165,13 @@ public class UserRepo
 	{
 		jdbcTemplate.update(department_request_approve, userId, departId);
 
+	}
+
+	public UserUpdateDTO updateEmployee(int empId)
+	{
+		UserUpdateDTO updateUser = jdbcTemplate.queryForObject(fetch_user,
+				new BeanPropertyRowMapper<>(UserUpdateDTO.class), empId);
+		return updateUser;
 	}
 
 }
