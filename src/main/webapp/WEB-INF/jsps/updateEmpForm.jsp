@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<td>Email:</td>
-				<td><input type = "text" name="email" value="${updateEmployee.email}"></td>
+				<td><input type = "text" name="email" value="${updateEmployee.email}" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<td>Contact Num:</td>

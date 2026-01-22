@@ -47,19 +47,6 @@
 				<td>${userfromList.firstName}</td>
 				<td>${userfromList.lastName}</td>
 				<td>${userfromList.email}</td>
-
-				<td>
-					<form action="roleAssign" method="post">
-						<input type="hidden" name="id" value="${userfromList.id}">
-						<button type="submit" name="role" value="ADMIN">Admin</button>
-					</form>
-				</td>
-				<td>
-					<form action="roleAssign" method="post">
-						<input type="hidden" name="id" value="${userfromList.id}">
-						<button type="submit" name="role" value="EMPLOYEE">EMPLOYEE</button>
-					</form>
-				</td>
 			</tr>
 		</c:forEach>
 
