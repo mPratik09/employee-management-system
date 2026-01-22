@@ -9,7 +9,7 @@ public class ViewUsersDTO
 	private String firstName;
 	private String lastName;
 	private String email;
-	private int departId;
+	private Integer departId;
 	private String department;
 	private Status status;
 
@@ -63,12 +63,12 @@ public class ViewUsersDTO
 		this.email = email;
 	}
 
-	public int getDepartId()
+	public Integer getDepartId()
 	{
 		return departId;
 	}
 
-	public void setDepartId(int departId)
+	public void setDepartId(Integer departId)
 	{
 		this.departId = departId;
 	}
