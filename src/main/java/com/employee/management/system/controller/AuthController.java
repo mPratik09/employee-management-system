@@ -69,6 +69,7 @@ public class AuthController
 			return "login";
 		}
 
+		createSession(httpSession, user);
 //		String redirectTo = departService.getLandingViewForUser(user);
 
 		model.addAttribute("user", user);
