@@ -7,11 +7,11 @@
 <title>Login Here</title>
 </head>
 <body>
-	<form action="verifyLogin" method="post">
+	<form action="/employee-management-system/login" method="post">
 		<table border="2">
 			<tr>
 				<td>Username:</td>
-				<td><input type="text" name="email"></td>
+				<td><input type="text" name="username"></td>
 			</tr>
 			<tr>
 				<td>Password:</td>
