@@ -63,61 +63,6 @@ public class AuthController
 		return "support_dashboard";
 	}
 
-	@GetMapping("/loggedIn")
-	public String loggedIn()
-	{
-		return "loggedIn";
-	}
-
-//	@PostMapping("/login")
-//	public String verifyPassword(@RequestParam("email") String email, @RequestParam("password") String rawPassword,
-//			RedirectAttributes redirectAttributes, HttpSession httpSession, Model model)
-//	{
-//
-//		User user = authService.verifyUser(email, rawPassword);
-//
-//		if (user == null)
-//		{
-//			model.addAttribute("error", "Invalid email or password");
-//			return "login";
-//		}
-//
-//		createSession(httpSession, user);
-////		String redirectTo = departService.getLandingViewForUser(user);
-//
-//		model.addAttribute("user", user);
-//		switch (user.getStatus()) {
-//		case UNASSIGNED:
-//			List<Department> fetchedDepartments = departService.fetchDepartments();
-//
-//			model.addAttribute("departmentsList", fetchedDepartments);
-//			return "makeRequest";
-//		case PENDING:
-//			model.addAttribute("reqPendingMsg", "Your request is still pending.");
-//			return "reqPending";
-//		case REJECTED:
-//			return "login?rejected";
-//		case APPROVED:
-//
-//			DepartmentContext roleBasedRedirect = departService.roleBasedRedirect(user.getId());
-//			List<ViewUsersDTO> loadUsersByAllowedView = userService
-//					.loadUsersByAllowedView(roleBasedRedirect.getAllowedView());
-//
-//			model.addAttribute("usersList", loadUsersByAllowedView);
-//
-//			return roleBasedRedirect.getLandingPage();
-//		}
-//
-//		model.addAttribute("user", user);
-//		return "";
-//
-//		/*
-//		 * Query:Could it be a situation where a user exists with an APPROVED status but
-//		 * does not have an entry in the "emp_temp"(M:N) table??
-//		 */
-//
-//	}
-
 	@PostMapping("/logout")
 	public String logout(HttpSession httpSession)
 	{

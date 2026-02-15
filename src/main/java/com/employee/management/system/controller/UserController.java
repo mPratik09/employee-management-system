@@ -48,7 +48,7 @@ public class UserController
 		try
 		{
 			User user = userMapper.userMapper(userRequestDTO);
-//			log.info("Status:\t{}", user.getStatus());
+
 			UserResponseDTO savedUser = userService.saveUser(user);
 
 			log.info("User has been saved with id:\t{}", savedUser.getId());

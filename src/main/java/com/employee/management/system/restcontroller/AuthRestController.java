@@ -33,49 +33,6 @@ public class AuthRestController
 	@Autowired
 	private UserService userService;
 
-//	@PostMapping("/verifyLogin")
-//	public ResponseEntity<ApiResponse<?>> verifyLogin(@RequestBody UserRequestDTO request, HttpSession session)
-//	{
-//
-//		User user = authService.verifyUser(request.getEmail(), request.getPassword());
-//		log.info("Email: {}", request.getEmail());
-//		if (user == null)
-//		{
-//			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-//					.body(new ApiResponse<>(false, "Invalid email or password", null));
-//		}
-//
-//		session.setAttribute("userSession", user);
-//
-//		switch (user.getStatus()) {
-//
-//		case UNASSIGNED:
-//			return ResponseEntity.ok(new ApiResponse<>(true, "User is unassigned. Choose department first.",
-//					departService.fetchDepartments()));
-//
-//		case PENDING:
-//			return ResponseEntity.ok(new ApiResponse<>(true, "Your request is still pending.", null));
-//
-//		case REJECTED:
-//			return ResponseEntity.status(HttpStatus.FORBIDDEN)
-//					.body(new ApiResponse<>(false, "Your request has been rejected.", null));
-//
-//		case APPROVED:
-//			DepartmentContext context = departService.roleBasedRedirect(user.getId());
-//
-//			List<ViewUsersDTO> users = userService.loadUsersByAllowedView(context.getAllowedView());
-//
-//			Map<String, Object> approvedPayload = new HashMap<>();
-//			approvedPayload.put("landingPage", context.getLandingPage());
-//			approvedPayload.put("users", users);
-//
-//			return ResponseEntity.ok(new ApiResponse<>(true, "Employee logged in successfully..", approvedPayload));
-//		}
-//
-//		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//				.body(new ApiResponse<>(false, "Unexpected error..", null));
-//	}
-
 	@PostMapping("/logout")
 	public ResponseEntity<ApiResponse<Void>> logout(HttpSession session)
 	{
