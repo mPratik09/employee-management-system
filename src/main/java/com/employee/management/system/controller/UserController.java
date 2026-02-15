@@ -87,7 +87,6 @@ public class UserController
 	public String approveDepartRequest(@RequestParam("empId") int empId, @RequestParam("departId") int departId,
 			Model model)
 	{
-		log.info("Inside role assign controller {}");
 
 		log.info("User Id: {} || Department Id {}", empId, departId);
 
