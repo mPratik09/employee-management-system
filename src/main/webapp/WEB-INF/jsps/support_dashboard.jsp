@@ -13,6 +13,8 @@
 	<h2>Welcome to SUPPORT Page..</h2>
 	<%@ include file="logout.jsp"%>
 
+	${pageContext.request.userPrincipal.name}
+
 	<br />
 	<br /> ${user.status}
 	<br />

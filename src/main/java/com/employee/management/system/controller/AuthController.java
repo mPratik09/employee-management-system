@@ -10,11 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.employee.management.system.config.DepartmentContext;
+import com.employee.management.system.entity.Department;
 import com.employee.management.system.entity.User;
 import com.employee.management.system.entity.UserPrincipal;
 import com.employee.management.system.request.dto.ViewUsersDTO;
@@ -61,6 +63,17 @@ public class AuthController
 
 		modelMap.addAttribute("usersList", loadUsersByAllowedView);
 		return "support_dashboard";
+	}
+
+	@GetMapping("/makeRequest")
+	public String makeRequest(Model model)
+	{
+		List<Department> fetchedDepartments = departService.fetchDepartments();
+		model.addAttribute("departmentsList", fetchedDepartments);
+
+		log.info("List of Departments: {}", fetchedDepartments);
+
+		return "makeRequest";
 	}
 
 	@PostMapping("/logout")

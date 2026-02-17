@@ -77,4 +77,13 @@ public class DepartmentService
 		return departmentsList;
 	}
 
+	public void departmentExists(int departId)
+	{
+		if (!departRepo.checkDepartmentExists(departId))
+		{
+			log.info("Department Not Found..");
+			throw new IllegalArgumentException("Invalid department..");
+		}
+
+	}
 }

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -66,6 +67,23 @@ public class DepartmentRepo
 		log.info("Fetched Department:\t{}", departmentContext);
 
 		return departmentContext;
+	}
+
+	public boolean checkDepartmentExists(int departId)
+	{
+		String fetchDepartmentById = fetch_departments + " where id = ?";
+
+		try
+		{
+			Department department = jdbcTemplate.queryForObject(fetchDepartmentById,
+					new BeanPropertyRowMapper<>(Department.class), departId);
+			log.info("Fetched Department by Id query: {} || Department Id: {}", fetchDepartmentById, departId);
+			return true;
+		} catch (EmptyResultDataAccessException e)
+		{
+			log.info("Fetched Department by Id query: {} || Department Id: {}", fetchDepartmentById, departId);
+			return false;
+		}
 	}
 
 }

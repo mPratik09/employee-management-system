@@ -21,6 +21,9 @@ public class UserService
 	@Autowired
 	UserRepo userRepo;
 
+	@Autowired
+	DepartmentService departmentService;
+
 	private static Logger log = LoggerFactory.getLogger(UserService.class);
 
 	public UserResponseDTO saveUser(User user)
@@ -87,9 +90,11 @@ public class UserService
 		return null;
 	}
 
-	public void makeRequest(int userId, int departIds)
+	public void makeRequest(int userId, int departId)
 	{
-		userRepo.makeRequest(userId, departIds);
+		departmentService.departmentExists(departId);
+
+		userRepo.makeRequest(userId, departId);
 	}
 
 	public void approveRequest(int userId, int departId)

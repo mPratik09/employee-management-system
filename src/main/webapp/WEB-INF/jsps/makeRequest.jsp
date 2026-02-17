@@ -24,8 +24,7 @@
 	<br />
 	<br />${user}
 	<br />
-	<form action="makeRequest" method="post">
-		<input type="hidden" name="empId" value="${user.id}">
+		<form action="${pageContext.request.contextPath}/makeRequest" method="post">
 		<table border="2">
 			<c:forEach var="dept" items="${departmentsList}">
 				<tr>

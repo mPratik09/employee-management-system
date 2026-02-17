@@ -33,7 +33,7 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler
 
 		if (status == Status.UNASSIGNED)
 		{
-			response.sendRedirect("/makeRequest");
+			response.sendRedirect(request.getContextPath() + "/makeRequest");
 			return;
 		}
 

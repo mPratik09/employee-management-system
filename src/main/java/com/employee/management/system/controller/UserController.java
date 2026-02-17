@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.employee.management.system.entity.User;
+import com.employee.management.system.entity.UserPrincipal;
 import com.employee.management.system.mapper.UserMapper;
 import com.employee.management.system.repo.UserRepo;
 import com.employee.management.system.request.dto.UserRequestDTO;
@@ -71,13 +73,15 @@ public class UserController
 	}
 
 	@PostMapping("/makeRequest")
-	public String makeRequest(@RequestParam("departId") int departId, @RequestParam("empId") int empId, Model model)
+	public String makeRequest(@RequestParam("departId") int departId,
+			@AuthenticationPrincipal UserPrincipal userPrincipal, Model model)
 	{
-		userService.changeStatusToPending(empId);
 
-		statusService.checkStatus(empId);
+		userService.changeStatusToPending(userPrincipal.getUserId());
 
-		userService.makeRequest(empId, departId);
+		statusService.checkStatus(userPrincipal.getUserId());
+
+		userService.makeRequest(userPrincipal.getUserId(), departId);
 
 		model.addAttribute("reqPendingMsg", "Your request sent to Suport person..");
 		return "reqPending";
