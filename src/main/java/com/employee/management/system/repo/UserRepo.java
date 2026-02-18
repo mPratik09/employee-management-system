@@ -32,8 +32,8 @@ public class UserRepo
 	@Value("${FETCH_USER}")
 	private String fetch_user;
 
-	@Value("${FETCH_USERS}")
-	private String fetch_users;
+	@Value("${FETCH_ALL_USERS}")
+	private String fetch_all_users;
 
 	@Value("${FETCH_PENDING_USERS}")
 	private String fetch_pending_users;
@@ -64,6 +64,9 @@ public class UserRepo
 
 	@Value("${SAVE_UPDATED_EMPLOYEE}")
 	private String save_updated_employee;
+
+	@Value("${FETCH_EMPLOYEES_BY_DEPARTMENT}")
+	private String fetch_employees_by_department;
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -126,7 +129,7 @@ public class UserRepo
 
 	public List<ViewUsersDTO> fetchAllUsers()
 	{
-		List<ViewUsersDTO> pendingUsers = jdbcTemplate.query(fetch_users,
+		List<ViewUsersDTO> pendingUsers = jdbcTemplate.query(fetch_all_users,
 				new BeanPropertyRowMapper<>(ViewUsersDTO.class));
 
 		log.info("All Users:\t{}", pendingUsers);
@@ -196,6 +199,17 @@ public class UserRepo
 
 		return userMapper.userDtoMapper(updatedUser);
 
+	}
+
+	public List<UserResponseDTO> findEmployeesByDepartment(String department)
+	{
+
+		List<UserResponseDTO> employeesList = jdbcTemplate.query(fetch_employees_by_department,
+				new BeanPropertyRowMapper<>(UserResponseDTO.class), department);
+
+		log.info("SQL QUERY - FETCH_EMPLOYEES_BY_DEPARTMENT: {} || Department: {}", fetch_employees_by_department,
+				department);
+		return employeesList;
 	}
 
 }

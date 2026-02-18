@@ -130,4 +130,12 @@ public class UserService
 		return saveUpdatedEmployee;
 	}
 
+	public List<UserResponseDTO> fetchEmployeesByDepartment(String department)
+	{
+		List<UserResponseDTO> employeesList = userRepo.findEmployeesByDepartment(department);
+		log.info("List of employees from \"{}\" department: {}", department, employeesList);
+
+		return employeesList;
+	}
+
 }

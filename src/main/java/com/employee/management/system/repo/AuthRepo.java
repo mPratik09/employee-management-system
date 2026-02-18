@@ -40,7 +40,7 @@ public class AuthRepo
 	public UserAuthDTO findUserByEmail(String email)
 	{
 
-		log.info("SQL query - FIND_BY_EMAILID: {} || email: {}", authenticate_user, email);
+		log.info("SQL QUERY - FIND_BY_EMAILID: {} || email: {}", authenticate_user, email);
 
 //		TODO: fetch the whole user object insted of only password
 		try

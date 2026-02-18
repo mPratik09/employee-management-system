@@ -16,7 +16,7 @@
 
 	<br />
 	<br />
-
+	${pageContext.request.userPrincipal.name}
 	<br />
 	<br /> ${user.status}
 	<br />
@@ -35,6 +35,7 @@
 			<th>First Name</th>
 			<th>Last Name</th>
 			<th>Email</th>
+			<th>Status</th>
 
 		</tr>
 
@@ -42,12 +43,13 @@
 			<p>${msg}</p>
 		</c:if>
 
-		<c:forEach items="${usersList}" var="userfromList">
+		<c:forEach items="${employeesList}" var="userfromList">
 			<tr>
 				<td>${userfromList.id}</td>
 				<td>${userfromList.firstName}</td>
 				<td>${userfromList.lastName}</td>
 				<td>${userfromList.email}</td>
+				<td>${userfromList.status}</td>
 			</tr>
 		</c:forEach>
 

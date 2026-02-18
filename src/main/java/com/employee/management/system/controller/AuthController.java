@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -20,6 +21,7 @@ import com.employee.management.system.entity.Department;
 import com.employee.management.system.entity.User;
 import com.employee.management.system.entity.UserPrincipal;
 import com.employee.management.system.request.dto.ViewUsersDTO;
+import com.employee.management.system.response.dto.UserResponseDTO;
 import com.employee.management.system.service.AuthService;
 import com.employee.management.system.service.DepartmentService;
 import com.employee.management.system.service.UserService;
@@ -54,6 +56,7 @@ public class AuthController
 	@GetMapping("/support_dashboard")
 	public String support_dashboard(Authentication authentication, ModelMap modelMap)
 	{
+
 		UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
 
 		DepartmentContext roleBasedRedirect = departService.roleBasedRedirect(principal.getUserId());
@@ -74,6 +77,18 @@ public class AuthController
 		log.info("List of Departments: {}", fetchedDepartments);
 
 		return "makeRequest";
+	}
+
+	@GetMapping("/hr_portal")
+	public String hrPortal(ModelMap modelMap, @AuthenticationPrincipal UserPrincipal userPrincipal, Model model)
+	{
+		String department = userPrincipal.getDepartments().get(0).getDepartment();
+
+		List<UserResponseDTO> fetchEmployeesByDepartment = userService.fetchEmployeesByDepartment(department);
+
+		modelMap.addAttribute("employeesList", fetchEmployeesByDepartment);
+
+		return userPrincipal.getDepartments().get(0).getLandingPage();
 	}
 
 	@PostMapping("/logout")

@@ -112,9 +112,9 @@ public class UserResponseDTO
 	@Override
 	public String toString()
 	{
-		return "UserResponseDTO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", contactNum=" + contactNum + ", status=" + status + ", createdAt=" + createdAt + ", updatedAt="
-				+ updatedAt + "]";
+		return "\nUserResponseDTO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
+				+ email + ", contactNum=" + contactNum + ", status=" + status + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + "]";
 	}
 
 }
