@@ -87,7 +87,7 @@ public class UserController
 		return "reqPending";
 	}
 
-	@PostMapping("/approveReq")
+	@PostMapping("/url/approveReq")
 	public String approveDepartRequest(@RequestParam("empId") int empId, @RequestParam("departId") int departId,
 			Model model)
 	{
@@ -106,7 +106,7 @@ public class UserController
 		return "support_dashboard";
 	}
 
-	@PostMapping("/updateEmp")
+	@PostMapping("/url/updateEmp")
 	public String updateEmpployee(@RequestParam("empId") int empId, Model model)
 	{
 		UserUpdateDTO updateEmployee = userService.updateEmployee(empId);

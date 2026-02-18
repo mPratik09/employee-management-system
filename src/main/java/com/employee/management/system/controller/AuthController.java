@@ -53,7 +53,7 @@ public class AuthController
 		return "login";
 	}
 
-	@GetMapping("/support_dashboard")
+	@GetMapping("/url/support_dashboard")
 	public String support_dashboard(Authentication authentication, ModelMap modelMap)
 	{
 
@@ -79,19 +79,17 @@ public class AuthController
 		return "makeRequest";
 	}
 
-	@GetMapping("/hr_portal")
+	@GetMapping("/url/{redirectPage}")
 	public String hrPortal(ModelMap modelMap, @AuthenticationPrincipal UserPrincipal userPrincipal, Model model)
 	{
 		String department = userPrincipal.getDepartments().get(0).getDepartment();
-
 		List<UserResponseDTO> fetchEmployeesByDepartment = userService.fetchEmployeesByDepartment(department);
 
 		modelMap.addAttribute("employeesList", fetchEmployeesByDepartment);
-
 		return userPrincipal.getDepartments().get(0).getLandingPage();
 	}
 
-	@PostMapping("/logout")
+	@PostMapping("/url/logout")
 	public String logout(HttpSession httpSession)
 	{
 		httpSession.invalidate();

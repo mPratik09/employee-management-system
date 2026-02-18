@@ -67,7 +67,7 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler
 
 			Department dept = departments.get(0);
 
-			response.sendRedirect(request.getContextPath() + "/" + dept.getLandingPage());
+			response.sendRedirect(request.getContextPath() + "/url/" + dept.getLandingPage());
 
 		}
 
