@@ -7,7 +7,7 @@
 <title>User Registration Form</title>
 </head>
 <body>
-	<form action="saveUser" method="post">
+	<form action="/employee-management-system/saveUser" method="post">
 		<table border="5">
 			<tr>
 				<td><label>First Name:</label></td>
