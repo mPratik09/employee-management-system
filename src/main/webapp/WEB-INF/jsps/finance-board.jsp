@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>HUMAN RESOURCES </title>
+<title>Finance Board</title>
 </head>
 <body>
 
