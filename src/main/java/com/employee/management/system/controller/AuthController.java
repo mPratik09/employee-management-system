@@ -53,6 +53,13 @@ public class AuthController
 		return "login";
 	}
 
+	@GetMapping("/reqPending")
+	public String reqPending(HttpSession session, ModelMap modelMap)
+	{
+		modelMap.addAttribute("reqPendingMsg", "You resquest has been sent to support persion.");
+		return "reqPending";
+	}
+
 	@GetMapping("/url/support_dashboard")
 	public String support_dashboard(Authentication authentication, ModelMap modelMap)
 	{

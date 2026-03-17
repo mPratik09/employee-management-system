@@ -16,8 +16,7 @@
 	<br /> ${user.status}
 	<br />
 	<br />
-	<br /> ${user.id} ${user.firstName} ${user.lastName} ${user.email}
-	${user.contactNum}
+	<br /> ${user.userId} ${user.username}
 
 
 </body>

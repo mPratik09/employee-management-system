@@ -39,7 +39,8 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler
 
 		if (status == Status.PENDING)
 		{
-			response.sendRedirect("/reqPending");
+			request.getSession().setAttribute("user", principal);
+			response.sendRedirect(request.getContextPath() + "/reqPending");
 			return;
 		}
 
