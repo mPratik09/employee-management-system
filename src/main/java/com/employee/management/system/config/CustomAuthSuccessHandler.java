@@ -62,7 +62,7 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler
 
 			if (departments.size() > 1)
 			{
-				response.sendRedirect("/chooseDepartment");
+				response.sendRedirect(request.getContextPath() + "/url/" + "chooseDepartment");
 				return;
 			}
 
