@@ -16,11 +16,6 @@
 	<br />
 	<br />
 	<h4>Welcome ${email}</h4>
-	<br /> ${user.status}
-	<br />
-	<br />
-	<br /> ${user.id} ${user.firstName} ${user.lastName} ${user.email}
-	${user.contactNum}
 	<br />
 	<br />${user}
 	<br />
@@ -38,5 +33,6 @@
 			</tr>
 		</table>
 	</form>
+<%@ include file="username.jsp"%>
 </body>
 </html>

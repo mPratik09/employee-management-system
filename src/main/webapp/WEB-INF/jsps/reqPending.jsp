@@ -13,11 +13,10 @@
 	<h2>${reqPendingMsg}</h2>
 
 	<br />
-	<br /> ${user.status}
 	<br />
 	<br />
-	<br /> ${user.userId} ${user.username}
 
 
+	<%@ include file="username.jsp"%>
 </body>
 </html>

@@ -23,5 +23,6 @@
 	<br /> ${user.id} ${user.firstName} ${user.lastName} ${user.email}
 	${user.contactNum}
 
+	<%@ include file="username.jsp"%>
 </body>
 </html>

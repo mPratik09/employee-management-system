@@ -19,13 +19,6 @@
 	<h2>Registered as an Admin</h2>
 
 	<br />
-	<br /> ${user.status}
-	<br />
-	<br />
-	<br /> ${user.id} ${user.firstName} ${user.lastName} ${user.email}
-	${user.contactNum}
-	<br />
-	<br />${user}
 	<br />
 	<br />
 
@@ -52,5 +45,6 @@
 
 	</table>
 
+	<%@ include file="username.jsp"%>
 </body>
 </html>

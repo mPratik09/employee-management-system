@@ -8,6 +8,8 @@
 </head>
 <body>
 
+	<%@ include file="username.jsp"%>
+
 	<h2>Update Employee</h2>
 
 	${updateEmployee}

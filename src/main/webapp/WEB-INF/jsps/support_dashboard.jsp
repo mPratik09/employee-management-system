@@ -13,15 +13,9 @@
 	<h2>Welcome to SUPPORT Page..</h2>
 	<%@ include file="logout.jsp"%>
 
-	${pageContext.request.userPrincipal.name}
-
 	<br />
-	<br /> ${user.status}
 	<br />
-	<br /> ${user.id} ${user.firstName} ${user.lastName} ${user.email}
-	${user.contactNum}
 	<br />
-	<br />${user}
 	<br />
 	<br />
 	<br />
@@ -79,5 +73,6 @@
 		</c:forEach>
 
 	</table>
+	<%@ include file="username.jsp"%>
 </body>
 </html>

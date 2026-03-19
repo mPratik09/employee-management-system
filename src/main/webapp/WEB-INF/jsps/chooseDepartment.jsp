@@ -9,6 +9,7 @@
 <body>
 
 	<%@ include file="logout.jsp"%>
+	<%@ include file="username.jsp"%>
 
 	<h2>Choose your department..</h2>
 </body>
