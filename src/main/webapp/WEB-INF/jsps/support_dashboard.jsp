@@ -12,15 +12,8 @@
 
 	<h2>Welcome to SUPPORT Page..</h2>
 	<%@ include file="logout.jsp"%>
-
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-
-
+	<br>
+	<br>
 	<table border="4">
 		<tr>
 			<th>Id</th>

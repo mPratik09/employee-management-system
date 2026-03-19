@@ -13,16 +13,8 @@
 	<%@ include file="logout.jsp"%>
 
 	<h2>Welcome to HUMAN RESOURCES Page</h2>
-
-	<br />
-	<br />
-	${pageContext.request.userPrincipal.name}
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-
+	<br>
+	<br>
 	<table border="4">
 		<tr>
 			<th>Id</th>

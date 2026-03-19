@@ -16,7 +16,6 @@
 	<br />
 	<br />
 
-
 	<%@ include file="username.jsp"%>
 </body>
 </html>
