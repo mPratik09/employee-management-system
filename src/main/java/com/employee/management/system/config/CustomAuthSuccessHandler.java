@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 import com.employee.management.system.entity.Department;
 import com.employee.management.system.entity.Status;
 import com.employee.management.system.entity.UserPrincipal;
+import com.employee.management.system.service.JWTService;
 
 @Component
 public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler
@@ -23,11 +25,16 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler
 
 	private static final Logger log = LoggerFactory.getLogger(CustomAuthSuccessHandler.class);
 
+	@Autowired
+	private JWTService jwtService;
+
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException
 	{
 		UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
+
+		jwtService.generateToken(principal.getUsername());
 
 		Status status = principal.getStatus();
 
