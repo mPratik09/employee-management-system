@@ -79,47 +79,5 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler
 
 		}
 
-//		log.info("11. Authentication:\t{}", authentication);
-//		log.info("22. Authentication:\t{}", authentication.getAuthorities());
-//		HttpSession session = request.getSession();
-//
-//		// 1️⃣ Get logged-in username (email)
-//		String email = authentication.getName();
-//
-//		// 2️⃣ Load full User object from DB
-//		UserAuthDTO user = authService.getByUserEmail(email);
-//
-//		// 3️⃣ Store user in session
-//		session.setAttribute("user", user);
-//
-//		// 4️⃣ Switch based on status
-//		switch (user.getStatus()) {
-//
-//		case UNASSIGNED:
-//			response.sendRedirect(request.getContextPath() + "/makeRequest");
-//			break;
-//
-//		case PENDING:
-//			response.sendRedirect(request.getContextPath() + "/reqPending");
-//			break;
-//
-//		case REJECTED:
-//			response.sendRedirect(request.getContextPath() + "/login?rejected");
-//			break;
-//
-//		case APPROVED:
-//
-//			DepartmentContext roleBasedRedirect = departService.roleBasedRedirect(user.getId());
-//
-//			// Store required values in session
-//			session.setAttribute("allowedView", roleBasedRedirect.getAllowedView());
-//			log.info("LAnding PAge:\t{}", roleBasedRedirect.getLandingPage());
-//			response.sendRedirect(request.getContextPath() + roleBasedRedirect.getLandingPage());
-//			break;
-//
-//		default:
-//			response.sendRedirect(request.getContextPath() + "/login");
-//		}
-
 	}
 }
