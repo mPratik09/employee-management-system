@@ -44,11 +44,11 @@ public class UserController
 	private static Logger log = LoggerFactory.getLogger(UserController.class);
 
 	@PostMapping("/saveUser")
-	public String persistUser(@ModelAttribute UserRequestDTO userRequestDTO, RedirectAttributes redirectAttributes)
+	public String persistUser(@ModelAttribute UserRequestDTO userReqDTO, RedirectAttributes redirectAttributes)
 	{
 		try
 		{
-			User user = userMapper.userMapper(userRequestDTO);
+			User user = userMapper.userMapper(userReqDTO);
 
 			UserResponseDTO savedUser = userService.saveUser(user);
 
