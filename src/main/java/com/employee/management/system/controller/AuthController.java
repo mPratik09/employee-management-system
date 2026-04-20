@@ -2,6 +2,8 @@ package com.employee.management.system.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -20,6 +22,8 @@ import com.employee.management.system.config.DepartmentContext;
 import com.employee.management.system.entity.Department;
 import com.employee.management.system.entity.User;
 import com.employee.management.system.entity.UserPrincipal;
+import com.employee.management.system.filter.BlacklistService;
+import com.employee.management.system.filter.JwtFilter;
 import com.employee.management.system.request.dto.ViewUsersDTO;
 import com.employee.management.system.response.dto.UserResponseDTO;
 import com.employee.management.system.service.AuthService;
@@ -33,13 +37,16 @@ public class AuthController
 	private static Logger log = LoggerFactory.getLogger(AuthController.class);
 
 	@Autowired
-	private AuthService authService;
-
-	@Autowired
 	DepartmentService departService;
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	JwtFilter jwtFilter;
+
+	@Autowired
+	BlacklistService blacklistService;
 
 	@GetMapping("/registerUser")
 	public String registerUser()
@@ -97,10 +104,24 @@ public class AuthController
 	}
 
 	@PostMapping("/url/logout")
-	public String logout(HttpSession httpSession)
+	public String logout(HttpServletRequest request, HttpServletResponse response)
 	{
-		httpSession.invalidate();
-		log.info("Session invalidated. User logged out.");
+
+		String token = jwtFilter.getTokenFromCookie(request);
+
+		if (token != null)
+		{
+			blacklistService.blacklistToken(token);
+			log.info("Token added to blacklist");
+		}
+
+		Cookie cookie = new Cookie("JWT_TOKEN", null);
+		cookie.setHttpOnly(true);
+		cookie.setMaxAge(0);
+		cookie.setPath("/");
+		response.addCookie(cookie);
+
+		log.info("Cookie destroyed. User logged out.");
 
 		return "redirect:/showLogin";
 	}

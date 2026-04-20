@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,8 +24,6 @@ import com.employee.management.system.service.JWTService;
 public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler
 {
 
-	private static final Logger log = LoggerFactory.getLogger(CustomAuthSuccessHandler.class);
-
 	@Autowired
 	private JWTService jwtService;
 
@@ -34,7 +33,15 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler
 	{
 		UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
 
-		jwtService.generateToken(principal.getUsername());
+		String token = jwtService.generateToken(principal.getUsername());
+
+		Cookie cookie = new Cookie("JWT_TOKEN", token);
+		cookie.setHttpOnly(true);
+		cookie.setSecure(false);
+		cookie.setPath("/");
+		cookie.setMaxAge(60 * 10);
+
+		response.addCookie(cookie);
 
 		Status status = principal.getStatus();
 
@@ -76,7 +83,6 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler
 			Department dept = departments.get(0);
 
 			response.sendRedirect(request.getContextPath() + "/url/" + dept.getLandingPage());
-
 		}
 
 	}

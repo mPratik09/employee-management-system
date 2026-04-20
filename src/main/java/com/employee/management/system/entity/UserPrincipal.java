@@ -19,6 +19,10 @@ public class UserPrincipal implements UserDetails
 
 	private UserAuthDTO userAuthDto;
 
+	public UserPrincipal()
+	{
+	}
+
 	public UserPrincipal(UserAuthDTO userAuthDto)
 	{
 		this.userAuthDto = userAuthDto;
@@ -27,11 +31,6 @@ public class UserPrincipal implements UserDetails
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities()
 	{
-////		return Collections.singleton(new SimpleGrantedAuthority(user.getRoles()));
-//
-//		return user.getRoles().stream().map(dept -> new SimpleGrantedAuthority(dept.getDepartment()))
-//				.collect(Collectors.toList());
-
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
 		for (Department dept : userAuthDto.getRoles())

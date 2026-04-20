@@ -1,16 +1,12 @@
 package com.employee.management.system.service;
 
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.Date;
-
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -20,23 +16,7 @@ public class JWTService
 
 	private static final Logger log = LoggerFactory.getLogger(JWTService.class);
 
-	public static String secretKey;
-
-	public JWTService()
-	{
-		try
-		{
-			KeyGenerator kGen = KeyGenerator.getInstance("HmacSHA256");
-			SecretKey sKey = kGen.generateKey();
-			secretKey = Base64.getEncoder().encodeToString(sKey.getEncoded());
-
-			log.info("Secret Key:: {}", secretKey);
-
-		} catch (NoSuchAlgorithmException e)
-		{
-			throw new RuntimeException(e);
-		}
-	}
+	public static String secretKey = "GK7xEbnq96rQzDTQzSdeYkktTQD2Tz1Kb7YSFjMoXt8=";
 
 	public String generateToken(String userName)
 	{
@@ -49,6 +29,27 @@ public class JWTService
 
 		return jwtToken;
 
+	}
+
+	public String extractUsername(String token)
+	{
+		return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+	}
+
+	public Claims extractClaims(String token)
+	{
+		return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
+	}
+
+	public boolean isTokenValid(String token, String username)
+	{
+		String extractedUser = extractUsername(token);
+		return (extractedUser.equals(username) && !isTokenExpired(token));
+	}
+
+	public boolean isTokenExpired(String token)
+	{
+		return extractClaims(token).getExpiration().before(new Date());
 	}
 
 }
